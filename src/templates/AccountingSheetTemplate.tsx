@@ -1,7 +1,7 @@
 import React from 'react';
 import { TemplateProps, formatLongDate } from './types';
 
-export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
+export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
   data,
   layoutStyle,
   logoError,
@@ -259,3 +259,4 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
     </div>
   );
 };
+export const AccountingSheetTemplate = SpecialDepartmentTemplate;

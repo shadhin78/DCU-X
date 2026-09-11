@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ZoomIn,
   ZoomOut,
@@ -14,7 +14,8 @@ import {
   LayoutStyle,
   ModernBlueTemplate,
   ClassicBlackTemplate,
-  AccountingSheetTemplate,
+  SpecialDepartmentTemplate,
+  getDepartmentTemplate,
 } from '../templates';
 
 export type { TemplateStyle };
@@ -40,26 +41,37 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>('side-by-side');
   const [logoError, setLogoError] = useState<boolean>(false);
 
-  // Detect if current department is Accounting
-  const isAccountingDept =
-    (data.institution.department || '').trim().toLowerCase().includes('accounting') ||
-    (data.student.department || '').trim().toLowerCase().includes('accounting');
+  // Resolve current department and its custom template if available
+  const currentDept = (data.institution.department || data.student.department || '').trim();
+  const deptTemplate = getDepartmentTemplate(currentDept);
+  const hasDeptTemplate = !!deptTemplate;
 
   // Active template state:
-  // Default to 'accounting-sheet' for Accounting, 'modern-blue' for others
+  // Default to 'special' if current department has a special template, otherwise 'modern-blue'
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateStyle>(() => {
-    return isAccountingDept ? 'accounting-sheet' : 'modern-blue';
+    return deptTemplate ? 'special' : 'modern-blue';
   });
 
-  // Strict enforcement:
-  // If department is NOT Accounting, the accounting template must not be active
+  // Track department changes to automatically show the selected department's template
+  const prevDeptRef = useRef<string>(currentDept);
+
   useEffect(() => {
-    if (isAccountingDept) {
-      setSelectedTemplate('accounting-sheet');
-    } else if (selectedTemplate === 'accounting-sheet') {
-      setSelectedTemplate('modern-blue');
+    if (prevDeptRef.current !== currentDept) {
+      prevDeptRef.current = currentDept;
+      if (deptTemplate) {
+        // Automatically switch to this department's special template
+        setSelectedTemplate('special');
+      } else if (selectedTemplate === 'special' || selectedTemplate === 'accounting-sheet') {
+        // Fallback to modern-blue if the department has no custom template
+        setSelectedTemplate('modern-blue');
+      }
+    } else {
+      // If template was set to 'special' or 'accounting-sheet' but no template exists
+      if (!deptTemplate && (selectedTemplate === 'special' || selectedTemplate === 'accounting-sheet')) {
+        setSelectedTemplate('modern-blue');
+      }
     }
-  }, [isAccountingDept]);
+  }, [currentDept, deptTemplate, selectedTemplate]);
 
   const handleZoomIn = () => setZoomLevel((prev) => Math.min(1.4, +(prev + 0.1).toFixed(2)));
   const handleZoomOut = () => setZoomLevel((prev) => Math.max(0.35, +(prev - 0.1).toFixed(2)));
@@ -163,20 +175,24 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
               <span>Classic</span>
             </button>
 
-            {/* Template 3: acc-x - ONLY available for Accounting department */}
-            {isAccountingDept && (
+            {/* Template 3: Special Department Template - ONLY available when selected department has a custom template */}
+            {hasDeptTemplate && (
               <button
                 type="button"
-                id="template-btn-accounting"
-                onClick={() => setSelectedTemplate('accounting-sheet')}
+                id="template-btn-special"
+                onClick={() => setSelectedTemplate('special')}
+                title={`Special ${deptTemplate.displayName} Department Template`}
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
-                  selectedTemplate === 'accounting-sheet'
+                  selectedTemplate === 'special' || selectedTemplate === 'accounting-sheet'
                     ? 'bg-amber-600 text-white shadow-xs'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 <FileSpreadsheet className="w-3.5 h-3.5" />
-                <span>acc-x</span>
+                <span>Special</span>
+                <span className="text-[10px] opacity-90 font-normal hidden sm:inline">
+                  [{deptTemplate.displayName}]
+                </span>
               </button>
             )}
           </div>
@@ -235,52 +251,82 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
           {/* ====================================================================
               ACTUAL A4 DOCUMENT SHEET (210mm × 297mm True A4 Aspect Ratio)
              ==================================================================== */}
-          <div
-            id="a4-cover-sheet"
-            style={
-              isAccountingDept && selectedTemplate === 'accounting-sheet'
-                ? {
-                    backgroundImage: 'url("/accountingdept-template.png")',
-                    backgroundSize: '100% 100%',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: '#ffffff',
-                  }
-                : {
-                    backgroundColor: '#ffffff',
-                  }
-            }
-            className="w-[210mm] h-[297mm] min-h-[297mm] max-h-[297mm] text-slate-950 shadow-2xl mx-auto relative box-border overflow-hidden select-text flex flex-col justify-between print:shadow-none print:m-0"
-          >
-            {/* TEMPLATE 1: Modern Blue */}
-            {selectedTemplate === 'modern-blue' && (
-              <ModernBlueTemplate
-                data={data}
-                layoutStyle={layoutStyle}
-                logoError={logoError}
-                onLogoError={() => setLogoError(true)}
-              />
-            )}
+          {(() => {
+            const isSpecialActive =
+              (selectedTemplate === 'special' || selectedTemplate === 'accounting-sheet') &&
+              Boolean(deptTemplate);
 
-            {/* TEMPLATE 2: Classic Black */}
-            {selectedTemplate === 'classic-black' && (
-              <ClassicBlackTemplate
-                data={data}
-                layoutStyle={layoutStyle}
-                logoError={logoError}
-                onLogoError={() => setLogoError(true)}
-              />
-            )}
+            return (
+              <div
+                id="a4-cover-sheet"
+                style={
+                  isSpecialActive && deptTemplate
+                    ? {
+                        backgroundImage: `url("${deptTemplate.imageUrl}")`,
+                        backgroundSize: '100% 100%',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundColor: '#ffffff',
+                      }
+                    : {
+                        backgroundColor: '#ffffff',
+                      }
+                }
+                className="w-[210mm] h-[297mm] min-h-[297mm] max-h-[297mm] text-slate-950 shadow-2xl mx-auto relative box-border overflow-hidden select-text flex flex-col justify-between print:shadow-none print:m-0"
+              >
+                {/* Background template image layer for guaranteed crisp PDF export & print rendering */}
+                {isSpecialActive && deptTemplate && (
+                  <img
+                    src={deptTemplate.imageUrl}
+                    alt={`${deptTemplate.displayName} Template Background`}
+                    crossOrigin="anonymous"
+                    className="absolute inset-0 w-full h-full object-fill pointer-events-none select-none z-0"
+                  />
+                )}
 
-            {/* TEMPLATE 3: Accounting Sheet (Accounting Department only) */}
-            {isAccountingDept && selectedTemplate === 'accounting-sheet' && (
-              <AccountingSheetTemplate
-                data={data}
-                layoutStyle={layoutStyle}
-                logoError={logoError}
-                onLogoError={() => setLogoError(true)}
-              />
-            )}
-          </div>
+                {/* TEMPLATE 1: Modern Blue */}
+                {selectedTemplate === 'modern-blue' && (
+                  <ModernBlueTemplate
+                    data={data}
+                    layoutStyle={layoutStyle}
+                    logoError={logoError}
+                    onLogoError={() => setLogoError(true)}
+                  />
+                )}
+
+                {/* TEMPLATE 2: Classic Black */}
+                {selectedTemplate === 'classic-black' && (
+                  <ClassicBlackTemplate
+                    data={data}
+                    layoutStyle={layoutStyle}
+                    logoError={logoError}
+                    onLogoError={() => setLogoError(true)}
+                  />
+                )}
+
+                {/* TEMPLATE 3: Special Department Template */}
+                {isSpecialActive && (
+                  <SpecialDepartmentTemplate
+                    data={data}
+                    layoutStyle={layoutStyle}
+                    logoError={logoError}
+                    onLogoError={() => setLogoError(true)}
+                  />
+                )}
+
+                {/* Fallback to Modern Blue if special template was active but department has no template */}
+                {!isSpecialActive &&
+                  selectedTemplate !== 'modern-blue' &&
+                  selectedTemplate !== 'classic-black' && (
+                    <ModernBlueTemplate
+                      data={data}
+                      layoutStyle={layoutStyle}
+                      logoError={logoError}
+                      onLogoError={() => setLogoError(true)}
+                    />
+                  )}
+              </div>
+            );
+          })()}
         </div>
       </div>
     </div>

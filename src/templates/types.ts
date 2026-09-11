@@ -1,6 +1,6 @@
 import { CoverPageData } from '../types';
 
-export type TemplateStyle = 'modern-blue' | 'classic-black' | 'accounting-sheet';
+export type TemplateStyle = 'modern-blue' | 'classic-black' | 'special' | 'accounting-sheet';
 export type LayoutStyle = 'side-by-side' | 'stacked';
 
 export interface TemplateProps {
