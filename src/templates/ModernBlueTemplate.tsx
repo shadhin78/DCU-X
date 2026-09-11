@@ -121,15 +121,13 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                 {data.course.courseTitle || ''}
               </span>
             </div>
-            {data.course.assignmentTitle && (
-              <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
-                <span className="font-bold text-[#334155]">Assignment Title</span>
-                <span className="font-bold text-[#64748b]">:</span>
-                <span className="font-bold text-[#0f172a] text-[14.5px] leading-snug">
-                  {data.course.assignmentTitle}
-                </span>
-              </div>
-            )}
+            <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
+              <span className="font-bold text-[#334155]">Assignment Title</span>
+              <span className="font-bold text-[#64748b]">:</span>
+              <span className="font-bold text-[#0f172a] text-[14.5px] leading-snug">
+                {data.course.assignmentTitle || ''}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -300,7 +298,7 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           <p className="font-sans text-[13.5px] text-[#475569]">
             Date of Submission:{' '}
             <span className="font-bold text-[#0f172a] text-[14px]">
-              {formattedDate || 'DD/MM/YYYY'}
+              {formattedDate || '___/____/______'}
             </span>
           </p>
         </div>

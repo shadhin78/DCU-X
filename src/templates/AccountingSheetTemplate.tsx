@@ -94,15 +94,13 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
               {data.course.courseTitle || ''}
             </span>
           </div>
-          {data.course.assignmentTitle && (
-            <div className="grid grid-cols-[135px_14px_1fr] items-baseline py-0.5">
-              <span className="font-bold text-slate-950">Assignment Title</span>
-              <span className="font-bold text-slate-950">:</span>
-              <span className="font-serif font-bold text-slate-950 leading-snug">
-                {data.course.assignmentTitle}
-              </span>
-            </div>
-          )}
+          <div className="grid grid-cols-[135px_14px_1fr] items-baseline py-0.5">
+            <span className="font-bold text-slate-950">Assignment Title</span>
+            <span className="font-bold text-slate-950">:</span>
+            <span className="font-serif font-bold text-slate-950 leading-snug">
+              {data.course.assignmentTitle || ''}
+            </span>
+          </div>
         </div>
       </div>
 
