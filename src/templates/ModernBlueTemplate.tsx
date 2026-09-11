@@ -166,13 +166,6 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                         </span>
                       </div>
                       <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
-                        <span className="text-[#475569] font-bold">ID</span>
-                        <span className="text-[#64748b] font-bold">:</span>
-                        <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">
-                          {data.student.studentId || ''}
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Dept</span>
                         <span className="text-[#64748b] font-bold">:</span>
                         <span className="text-[#0f172a] font-medium text-[13px]">
@@ -245,22 +238,17 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                       <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
-                      <span className="text-[#475569] font-bold">ID</span>
+                      <span className="text-[#475569] font-bold">Dept</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">{data.student.studentId || ''}</span>
+                      <span className="text-[#0f172a] font-medium text-[13px]">
+                        {data.student.department || data.institution.department || ''}
+                      </span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Year</span>
                       <span className="text-[#64748b] font-bold">:</span>
                       <span className="text-[#0f172a] font-medium text-[13px]">
                         {data.student.year || data.student.semester || ''}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-[48px_8px_1fr] items-baseline col-span-2">
-                      <span className="text-[#475569] font-bold">Dept</span>
-                      <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[13px]">
-                        {data.student.department || data.institution.department || ''}
                       </span>
                     </div>
                   </div>

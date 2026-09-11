@@ -403,7 +403,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               {!openSections.student && (
                 <p className="text-[11px] text-slate-500 font-normal truncate max-w-[240px] sm:max-w-xs">
                   {data.student.name || 'Student Name'} •{' '}
-                  {data.student.studentId || 'ID: Not set'}
+                  {data.student.roll ? `Roll: ${data.student.roll}` : 'Roll: Not set'}
                 </p>
               )}
             </div>
@@ -444,61 +444,6 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               </div>
               <div>
                 <label
-                  htmlFor="input-student-id"
-                  className="block text-xs font-semibold text-slate-700 mb-1"
-                >
-                  Student ID{' '}
-                  <span className="text-rose-500 font-bold" title="Required field">
-                    *
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  id="input-student-id"
-                  value={data.student.studentId}
-                  onChange={(e) => onUpdateStudent({ studentId: e.target.value })}
-                  placeholder="e.g. 2022-ACC-045"
-                  className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-mono text-slate-900 transition-shadow"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label
-                  htmlFor="input-student-dept"
-                  className="block text-xs font-semibold text-slate-700"
-                >
-                  Department{' '}
-                  <span className="text-rose-500 font-bold" title="Required field">
-                    *
-                  </span>
-                </label>
-                {!isStudentDeptSynced && (
-                  <button
-                    type="button"
-                    onClick={onSyncStudentDept}
-                    className="text-[11px] text-emerald-700 hover:text-emerald-800 font-medium inline-flex items-center gap-1 hover:underline cursor-pointer"
-                    title="Copy from Institution department"
-                  >
-                    <Link className="w-3 h-3" />
-                    <span>Sync with Institution Dept</span>
-                  </button>
-                )}
-              </div>
-              <input
-                type="text"
-                id="input-student-dept"
-                value={data.student.department}
-                onChange={(e) => onUpdateStudent({ department: e.target.value })}
-                placeholder="e.g. Accounting"
-                className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 transition-shadow"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label
                   htmlFor="input-student-roll"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
@@ -514,6 +459,41 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   onChange={(e) => onUpdateStudent({ roll: e.target.value })}
                   placeholder="e.g. 723849"
                   className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-mono text-slate-900 transition-shadow"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label
+                    htmlFor="input-student-dept"
+                    className="block text-xs font-semibold text-slate-700"
+                  >
+                    Department{' '}
+                    <span className="text-rose-500 font-bold" title="Required field">
+                      *
+                    </span>
+                  </label>
+                  {!isStudentDeptSynced && (
+                    <button
+                      type="button"
+                      onClick={onSyncStudentDept}
+                      className="text-[11px] text-emerald-700 hover:text-emerald-800 font-medium inline-flex items-center gap-1 hover:underline cursor-pointer"
+                      title="Copy from Institution department"
+                    >
+                      <Link className="w-3 h-3" />
+                      <span>Sync</span>
+                    </button>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  id="input-student-dept"
+                  value={data.student.department}
+                  onChange={(e) => onUpdateStudent({ department: e.target.value })}
+                  placeholder="e.g. Accounting"
+                  className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 transition-shadow"
                 />
               </div>
               <div>
@@ -541,6 +521,11 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   <option value="2nd Year">2nd Year</option>
                   <option value="3rd Year">3rd Year</option>
                   <option value="4th Year">4th Year</option>
+                  <option value="Masters 1st Year">Masters 1st Year</option>
+                  <option value="Masters Final Year">Masters Final Year</option>
+                  <option value="Degree 1st Year">Degree 1st Year</option>
+                  <option value="Degree 2nd Year">Degree 2nd Year</option>
+                  <option value="Degree 3rd Year">Degree 3rd Year</option>
                 </select>
               </div>
             </div>

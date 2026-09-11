@@ -35,7 +35,7 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
           name: parsed.student?.name ?? '',
           studentId: parsed.student?.studentId ?? '',
           department: parsed.student?.department || parsed.institution?.department || 'Physics',
-          roll: parsed.student?.roll ?? '',
+          roll: parsed.student?.roll || parsed.student?.studentId || '',
           year: parsed.student?.year || parsed.student?.semester || '1st Year',
           semester: parsed.student?.year || parsed.student?.semester || '1st Year',
           batch: '',

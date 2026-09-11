@@ -146,21 +146,14 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                       <span className="font-bold text-slate-950">{data.student.name || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
-                      <span className="font-bold text-slate-950">Student ID</span>
+                      <span className="font-bold text-slate-950">Roll</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="font-mono font-semibold text-slate-950">
-                        {data.student.studentId || ''}
-                      </span>
+                      <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Department</span>
                       <span className="font-bold text-slate-950">:</span>
                       <span className="text-slate-900">{data.student.department || ''}</span>
-                    </div>
-                    <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
-                      <span className="font-bold text-slate-950">Roll</span>
-                      <span className="font-bold text-slate-950">:</span>
-                      <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Year</span>
@@ -225,16 +218,12 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                     <span className="font-bold text-slate-950">{data.student.name || ''}</span>
                   </div>
                   <div className="flex gap-1.5">
-                    <span className="font-bold text-slate-950">ID:</span>
-                    <span className="font-mono text-slate-950">{data.student.studentId || ''}</span>
+                    <span className="font-bold text-slate-950">Roll:</span>
+                    <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <span className="font-bold text-slate-950">Dept:</span>
                     <span className="text-slate-900">{data.student.department || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="font-bold text-slate-950">Roll:</span>
-                    <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <span className="font-bold text-slate-950">Year:</span>

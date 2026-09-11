@@ -13,7 +13,7 @@ export interface CourseInfo {
 
 export interface StudentInfo {
   name: string;
-  studentId: string;
+  studentId?: string;
   department: string;
   roll: string;
   year?: string;
