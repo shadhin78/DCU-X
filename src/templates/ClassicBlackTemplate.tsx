@@ -130,9 +130,9 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
         {/* Lower Section */}
         <div className="my-1.5">
           {layoutStyle === 'side-by-side' ? (
-            <div className="grid grid-cols-2 gap-5 items-start">
+            <div className="grid grid-cols-2 gap-5 items-stretch">
               {/* Left: Submitted By */}
-              <div className="border border-slate-900/90 rounded-lg p-3 bg-white shadow-2xs flex flex-col justify-between">
+              <div className="border border-slate-900/90 rounded-lg p-3 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
                 <div>
                   <div className="border-b-2 border-slate-950 pb-1 mb-2">
                     <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
@@ -143,29 +143,29 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Name</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="font-bold text-slate-950">{data.student.name || ''}</span>
+                      <span className="font-bold text-slate-950 break-words min-w-0">{data.student.name || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Roll</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
+                      <span className="font-mono text-slate-900 break-words min-w-0">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Department</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="text-slate-900">{data.student.department || ''}</span>
+                      <span className="text-slate-900 break-words min-w-0">{data.student.department || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Year</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="text-slate-900">{data.student.year || data.student.semester || ''}</span>
+                      <span className="text-slate-900 break-words min-w-0">{data.student.year || data.student.semester || ''}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Right: Submitted To */}
-              <div className="border border-slate-900/90 rounded-lg p-3 bg-white/95 shadow-2xs flex flex-col justify-between backdrop-blur-xs">
+              <div className="border border-slate-900/90 rounded-lg p-3 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
                 <div>
                   <div className="border-b-2 border-slate-950 pb-1 mb-2">
                     <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
@@ -176,17 +176,17 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Name</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="font-bold text-slate-950">{data.teacher.name || ''}</span>
+                      <span className="font-bold text-slate-950 break-words min-w-0">{data.teacher.name || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Designation</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="text-slate-900">{data.teacher.designation || ''}</span>
+                      <span className="text-slate-900 break-words min-w-0">{data.teacher.designation || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Department</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="text-slate-900">
+                      <span className="text-slate-900 break-words min-w-0">
                         {data.teacher.department
                           ? `Department of ${data.teacher.department}`
                           : ''}
@@ -195,7 +195,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">College</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="text-slate-800 text-[11px]">
+                      <span className="text-slate-800 text-[11px] break-words min-w-0">
                         {data.institution.collegeName || ''}
                       </span>
                     </div>
