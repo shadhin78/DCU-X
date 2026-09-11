@@ -119,29 +119,29 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
                   </h3>
                 </div>
                 <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
-                  <div className="grid grid-cols-[80px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Name</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-bold text-slate-950">{data.student.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[80px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Student ID</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-mono font-semibold text-slate-950">
                       {data.student.studentId || ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[80px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Department</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900">{data.student.department || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[80px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Roll</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[80px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Year</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900">{data.student.year || data.student.semester || ''}</span>
@@ -159,24 +159,24 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
                   </h3>
                 </div>
                 <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Name</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-bold text-slate-950">{data.teacher.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Designation</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900">{data.teacher.designation || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Department</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900">
                       {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">College</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-800 text-[11.5px]">
