@@ -137,7 +137,7 @@ export default function App() {
           {/* Right Column: Live A4 Preview (Sticky on desktop, stacked below on mobile) */}
           <div
             id="a4-preview-section"
-            className="lg:col-span-7 xl:col-span-7 w-full lg:sticky lg:top-4 self-start"
+            className="lg:col-span-7 xl:col-span-7 w-full self-start"
           >
             <A4PreviewPanel data={data} />
           </div>

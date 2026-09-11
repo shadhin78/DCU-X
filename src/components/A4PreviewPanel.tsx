@@ -131,7 +131,7 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col">
       {/* Top Preview Control Bar */}
       <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-xs mb-3 space-y-2.5 print:hidden">
         <div className="flex items-center justify-between flex-wrap gap-2">
@@ -288,7 +288,7 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
       <div
         ref={stageRef}
         id="a4-cover-stage"
-        className="w-full overflow-x-auto overflow-y-hidden bg-slate-200/80 rounded-xl p-2 sm:p-5 lg:p-6 flex justify-center items-start border border-slate-300 shadow-inner min-h-0 print:p-0 print:m-0 print:border-none print:bg-transparent print:min-h-0 print:shadow-none"
+        className="w-full overflow-x-auto overflow-y-hidden bg-slate-200/80 rounded-xl p-2 sm:p-5 lg:p-6 flex justify-center items-start border border-slate-300 shadow-inner print:p-0 print:m-0 print:border-none print:bg-transparent print:min-h-0 print:shadow-none"
       >
         <div
           id="a4-cover-sheet-wrapper"
