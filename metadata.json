@@ -1,0 +1,6 @@
+{
+  "name": "Titumir Assignment Cover Generator",
+  "description": "Local-only assignment cover page generator for students of Government Titumir College with live A4 preview, PDF export, and print support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
