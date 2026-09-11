@@ -198,7 +198,8 @@
     }
 
     /* Reset scale and isolate sheet for exact A4 print */
-    #a4-cover-sheet-wrapper {
+    #a4-cover-sheet-wrapper,
+    #a4-cover-scaler {
       transform: none !important;
       padding: 0 !important;
       margin: 0 !important;

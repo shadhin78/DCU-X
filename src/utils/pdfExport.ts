@@ -418,6 +418,15 @@ export async function downloadCoverPagePdf(options: {
             clonedWrapper.style.height = '297mm';
           }
 
+          const clonedScaler = clonedDoc.getElementById('a4-cover-scaler');
+          if (clonedScaler) {
+            clonedScaler.style.transform = 'none';
+            clonedScaler.style.margin = '0';
+            clonedScaler.style.padding = '0';
+            clonedScaler.style.width = '210mm';
+            clonedScaler.style.height = '297mm';
+          }
+
           const clonedEl = clonedDoc.getElementById(elementId);
           if (clonedEl) {
             // Remove preview-only shadow and ensure pure A4 margins
