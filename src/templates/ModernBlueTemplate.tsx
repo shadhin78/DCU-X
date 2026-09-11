@@ -17,10 +17,10 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
       </div>
 
       {/* Content Container (Inside Safe A4 Print Margin) */}
-      <div className="relative z-20 w-full h-full px-[18mm] py-[15mm] flex flex-col justify-between">
+      <div className="page-frame relative z-20 w-full h-full px-[18mm] py-[15mm] flex flex-col justify-between box-border">
         {/* TOP SECTION: College Logo + Name Lockup */}
         <div className="flex flex-col items-center pt-1">
-          <div className="flex items-center justify-center gap-4 w-full max-w-[480px]">
+          <div className="flex items-center justify-center gap-4 w-full max-w-[490px]">
             {/* Logo Area */}
             <div className="h-[74px] w-[74px] flex items-center justify-center shrink-0">
               {!logoError ? (
@@ -61,28 +61,32 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           </div>
 
           {/* Horizontal Divider with Centered Diamond Symbol */}
-          <div className="w-full max-w-[440px] mx-auto flex items-center justify-center my-2.5">
+          <div className="w-full max-w-[490px] mx-auto flex items-center justify-center my-2.5">
             <div className="h-[1px] bg-slate-300 flex-1" />
             <div className="mx-2.5 w-2.5 h-2.5 rotate-45 border border-slate-500 bg-white shrink-0" />
             <div className="h-[1px] bg-slate-300 flex-1" />
           </div>
         </div>
 
-        {/* MIDDLE SECTION: "ASSIGNMENT", Assignment No & Course Card */}
-        <div className="text-center my-auto flex flex-col items-center py-1">
-          <h3 className="font-sans font-bold text-[17px] tracking-[0.08em] text-[#1e293b] uppercase">
-            ASSIGNMENT
-          </h3>
+        {/* SHARED CONTENT WRAPPER: Assignment Header, Course Card, Submission Section */}
+        <div className="page-content w-full max-w-[490px] mx-auto box-border flex flex-col gap-6">
+          {/* ASSIGNMENT HEADER */}
+          <div className="assignment-header w-full box-border flex flex-col items-center justify-center m-0 text-center">
+            <h3 className="font-sans font-bold text-[17px] tracking-[0.08em] text-[#1e293b] uppercase mx-auto">
+              ASSIGNMENT
+            </h3>
 
-          <div className="mt-2.5 mb-3 inline-block border-[1.5px] border-[#1e3a8a] rounded-lg px-8 py-1.5 bg-white shadow-2xs">
-            <span className="font-sans text-[13.5px] font-semibold text-slate-800">
-              {data.course.assignmentNo
-                ? `Assignment No: ${data.course.assignmentNo}`
-                : 'Assignment No: 1'}
-            </span>
+            <div className="mt-2.5 inline-block border-[1.5px] border-[#1e3a8a] rounded-lg px-8 py-1.5 bg-white shadow-2xs mx-auto">
+              <span className="font-sans text-[13.5px] font-semibold text-slate-800">
+                {data.course.assignmentNo
+                  ? `Assignment No: ${data.course.assignmentNo}`
+                  : 'Assignment No: 1'}
+              </span>
+            </div>
           </div>
 
-          <div className="w-full max-w-[480px] mx-auto bg-[#f4f7fa] rounded-xl px-5 py-4 space-y-2 text-left border border-slate-200/60 shadow-2xs">
+          {/* COURSE / DETAILS CARD */}
+          <div className="course-card w-full box-border mx-0 bg-[#f4f7fa] rounded-xl px-5 py-4 space-y-2 text-left border border-slate-200/60 shadow-2xs">
             <div className="flex items-baseline gap-2 text-[13.5px]">
               <span className="font-bold text-[#475569] min-w-[105px]">Course Code:</span>
               <span className="font-semibold text-slate-800 font-mono">
@@ -106,128 +110,134 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
               </div>
             )}
           </div>
-        </div>
 
-        {/* LOWER SECTION: SUBMITTED BY & SUBMITTED TO */}
-        <div className="w-full max-w-[490px] mx-auto my-2">
-          {layoutStyle === 'side-by-side' ? (
-            <div className="grid grid-cols-2 gap-8 items-start">
-              {/* Left Column: SUBMITTED BY */}
-              <div>
-                <div className="border-b border-[#64748b] pb-1 mb-2.5">
-                  <h4 className="font-sans font-bold text-[12.5px] text-[#334155] uppercase tracking-wider">
-                    SUBMITTED BY
-                  </h4>
+          {/* SUBMISSION SECTION */}
+          <div
+            className={`submission-section w-full box-border ${
+              layoutStyle === 'side-by-side'
+                ? 'is-side-by-side grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-10 items-start'
+                : 'space-y-3'
+            }`}
+          >
+            {layoutStyle === 'side-by-side' ? (
+              <>
+                {/* Left Column: SUBMITTED BY */}
+                <div className="submitted-by min-w-0 w-full box-border">
+                  <div className="border-b border-[#64748b] pb-1 mb-2.5">
+                    <h4 className="font-sans font-bold text-[12.5px] text-[#334155] uppercase tracking-wider">
+                      SUBMITTED BY
+                    </h4>
+                  </div>
+                  <div className="space-y-1.5 font-sans text-[12.5px] text-slate-700">
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[58px]">Name:</span>
+                      <span className="font-semibold text-slate-900">
+                        {data.student.name || ''}
+                      </span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[58px]">Roll:</span>
+                      <span className="font-medium text-slate-900 font-mono">
+                        {data.student.roll || ''}
+                      </span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[58px]">ID:</span>
+                      <span className="font-mono font-medium text-slate-900">
+                        {data.student.studentId || ''}
+                      </span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[58px]">Year:</span>
+                      <span className="text-slate-800">{data.student.year || data.student.semester || ''}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-1.5 font-sans text-[12.5px] text-slate-700">
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">Name:</span>
-                    <span className="font-semibold text-slate-900">
-                      {data.student.name || ''}
-                    </span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">Roll:</span>
-                    <span className="font-medium text-slate-900 font-mono">
-                      {data.student.roll || ''}
-                    </span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">ID:</span>
-                    <span className="font-mono font-medium text-slate-900">
-                      {data.student.studentId || ''}
-                    </span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">Year:</span>
-                    <span className="text-slate-800">{data.student.year || data.student.semester || ''}</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Right Column: SUBMITTED TO */}
-              <div>
-                <div className="border-b border-[#64748b] pb-1 mb-2.5">
-                  <h4 className="font-sans font-bold text-[12.5px] text-[#334155] uppercase tracking-wider">
-                    SUBMITTED TO
-                  </h4>
-                </div>
-                <div className="space-y-1.5 font-sans text-[12.5px] text-slate-700">
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Name:</span>
-                    <span className="font-semibold text-slate-900">
-                      {data.teacher.name || ''}
-                    </span>
+                {/* Right Column: SUBMITTED TO */}
+                <div className="submitted-to min-w-0 w-full box-border">
+                  <div className="border-b border-[#64748b] pb-1 mb-2.5">
+                    <h4 className="font-sans font-bold text-[12.5px] text-[#334155] uppercase tracking-wider">
+                      SUBMITTED TO
+                    </h4>
                   </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Designation:</span>
-                    <span className="text-slate-800">{data.teacher.designation || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Department:</span>
-                    <span className="text-slate-800">
-                      {data.teacher.department
-                        ? `Department of ${data.teacher.department}`
-                        : ''}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Stacked Mode */
-            <div className="space-y-3">
-              <div>
-                <div className="border-b border-[#64748b] pb-1 mb-1.5">
-                  <h4 className="font-sans font-bold text-[12px] text-[#334155] uppercase tracking-wider">
-                    SUBMITTED BY
-                  </h4>
-                </div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-sans text-[12px]">
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">Name:</span>
-                    <span className="font-semibold text-slate-900">{data.student.name || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">ID:</span>
-                    <span className="font-mono text-slate-900">{data.student.studentId || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">Roll:</span>
-                    <span className="text-slate-900 font-mono">{data.student.roll || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">Year:</span>
-                    <span className="text-slate-900">{data.student.year || data.student.semester || ''}</span>
+                  <div className="space-y-1.5 font-sans text-[12.5px] text-slate-700">
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Name:</span>
+                      <span className="font-semibold text-slate-900">
+                        {data.teacher.name || ''}
+                      </span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Designation:</span>
+                      <span className="text-slate-800">{data.teacher.designation || ''}</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Department:</span>
+                      <span className="text-slate-800">
+                        {data.teacher.department
+                          ? `Department of ${data.teacher.department}`
+                          : ''}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
+            ) : (
+              /* Stacked Mode */
+              <>
+                <div className="submitted-by min-w-0 w-full box-border">
+                  <div className="border-b border-[#64748b] pb-1 mb-1.5">
+                    <h4 className="font-sans font-bold text-[12px] text-[#334155] uppercase tracking-wider">
+                      SUBMITTED BY
+                    </h4>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-sans text-[12px]">
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium">Name:</span>
+                      <span className="font-semibold text-slate-900">{data.student.name || ''}</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium">ID:</span>
+                      <span className="font-mono text-slate-900">{data.student.studentId || ''}</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium">Roll:</span>
+                      <span className="text-slate-900 font-mono">{data.student.roll || ''}</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <span className="text-[#64748b] font-medium">Year:</span>
+                      <span className="text-slate-900">{data.student.year || data.student.semester || ''}</span>
+                    </div>
+                  </div>
+                </div>
 
-              <div>
-                <div className="border-b border-[#64748b] pb-1 mb-1.5">
-                  <h4 className="font-sans font-bold text-[12px] text-[#334155] uppercase tracking-wider">
-                    SUBMITTED TO
-                  </h4>
+                <div className="submitted-to min-w-0 w-full box-border">
+                  <div className="border-b border-[#64748b] pb-1 mb-1.5">
+                    <h4 className="font-sans font-bold text-[12px] text-[#334155] uppercase tracking-wider">
+                      SUBMITTED TO
+                    </h4>
+                  </div>
+                  <div className="space-y-1 font-sans text-[12px]">
+                    <div className="flex gap-2">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Name:</span>
+                      <span className="font-semibold text-slate-900">{data.teacher.name || ''}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Designation:</span>
+                      <span className="text-slate-800">{data.teacher.designation || ''}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-[#64748b] font-medium min-w-[80px]">Department:</span>
+                      <span className="text-slate-800">
+                        {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-1 font-sans text-[12px]">
-                  <div className="flex gap-2">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Name:</span>
-                    <span className="font-semibold text-slate-900">{data.teacher.name || ''}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Designation:</span>
-                    <span className="text-slate-800">{data.teacher.designation || ''}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="text-[#64748b] font-medium min-w-[80px]">Department:</span>
-                    <span className="text-slate-800">
-                      {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+              </>
+            )}
+          </div>
         </div>
 
         {/* BOTTOM SECTION: Full-Width Divider Line + Centered Date */}

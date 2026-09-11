@@ -81,7 +81,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
         </div>
 
         {/* Middle Section */}
-        <div className="text-center my-auto flex flex-col items-center py-2">
+        <div className="text-center flex flex-col items-center py-2">
           <h2 className="font-cinzel font-black text-[26px] tracking-[0.28em] text-slate-950 uppercase">
             A S S I G N M E N T
           </h2>

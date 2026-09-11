@@ -74,6 +74,62 @@
   }
 }
 
+/* Unified Cover Page Layout Architecture */
+.page-frame {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 490px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.assignment-header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+}
+
+.assignment-header > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.course-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.submission-section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submission-section.is-side-by-side {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 2.5rem;
+}
+
+.submitted-by,
+.submitted-to {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', 'Hind Siliguri', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }

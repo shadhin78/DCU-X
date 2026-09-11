@@ -419,6 +419,16 @@ export async function downloadCoverPagePdf(options: {
       unpatchGlobalWindow();
     }
 
+    console.log('PDF_DEBUG_CANVAS:', {
+      canvasWidth: canvas.width,
+      canvasHeight: canvas.height,
+      elementClientWidth: element.clientWidth,
+      elementClientHeight: element.clientHeight,
+      elementOffsetWidth: element.offsetWidth,
+      elementOffsetHeight: element.offsetHeight,
+      elementRect: element.getBoundingClientRect(),
+    });
+
     const imgDataUrl = canvas.toDataURL('image/png', 1.0);
     if (!imgDataUrl || imgDataUrl === 'data:,') {
       throw new Error('Canvas render produced empty image.');
