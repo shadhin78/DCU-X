@@ -106,7 +106,7 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                 <span className="font-bold text-[#475569] min-w-[105px]">
                   Assignment Title:
                 </span>
-                <span className="font-medium italic text-slate-800 leading-snug">
+                <span className="font-medium text-slate-800 leading-snug">
                   {data.course.assignmentTitle}
                 </span>
               </div>

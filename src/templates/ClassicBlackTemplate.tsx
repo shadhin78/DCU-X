@@ -119,7 +119,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
               <div className="grid grid-cols-[135px_14px_1fr] items-baseline py-1">
                 <span className="font-bold text-slate-950">Assignment Title</span>
                 <span className="font-bold text-slate-950">:</span>
-                <span className="font-serif font-bold italic text-slate-950 leading-snug">
+                <span className="font-serif font-bold text-slate-950 leading-snug">
                   {data.course.assignmentTitle}
                 </span>
               </div>
