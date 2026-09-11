@@ -357,8 +357,12 @@ export async function downloadCoverPagePdf(options: {
         backgroundColor: '#ffffff',
         logging: false,
         imageTimeout: 15000,
-        windowWidth: 1200,
-        windowHeight: 1600,
+        windowWidth: 794,
+        windowHeight: 1123,
+        width: 794,
+        height: 1123,
+        x: 0,
+        y: 0,
         scrollX: 0,
         scrollY: 0,
         onclone: (clonedDoc) => {
@@ -367,17 +371,61 @@ export async function downloadCoverPagePdf(options: {
             patchWindowGetComputedStyle(clonedDoc.defaultView);
           }
 
+          // 2. Isolate document to exact 210mm x 297mm A4 page, matching @media print rules
+          clonedDoc.documentElement.style.width = '210mm';
+          clonedDoc.documentElement.style.height = '297mm';
+          clonedDoc.documentElement.style.margin = '0';
+          clonedDoc.documentElement.style.padding = '0';
+          clonedDoc.documentElement.style.overflow = 'hidden';
+
+          clonedDoc.body.style.width = '210mm';
+          clonedDoc.body.style.height = '297mm';
+          clonedDoc.body.style.margin = '0';
+          clonedDoc.body.style.padding = '0';
+          clonedDoc.body.style.overflow = 'hidden';
+          clonedDoc.body.style.backgroundColor = '#ffffff';
+
+          // Hide editor sidebar, headers, and UI elements in clone so they don't constrain width
+          const editor = clonedDoc.getElementById('assignment-cover-editor-section');
+          if (editor) editor.style.display = 'none';
+          const headerEl = clonedDoc.querySelector('header');
+          if (headerEl) headerEl.style.display = 'none';
+          const navEl = clonedDoc.querySelector('nav');
+          if (navEl) navEl.style.display = 'none';
+          const toast = clonedDoc.getElementById('pdf-download-toast');
+          if (toast) toast.style.display = 'none';
+
+          const stage = clonedDoc.getElementById('a4-cover-stage');
+          if (stage) {
+            stage.style.padding = '0';
+            stage.style.margin = '0';
+            stage.style.border = 'none';
+            stage.style.boxShadow = 'none';
+            stage.style.background = 'transparent';
+            stage.style.minHeight = '0';
+            stage.style.width = '210mm';
+            stage.style.height = '297mm';
+            stage.style.overflow = 'visible';
+            stage.style.display = 'block';
+          }
+
           const clonedWrapper = clonedDoc.getElementById(wrapperId);
           if (clonedWrapper) {
             clonedWrapper.style.transform = 'none';
             clonedWrapper.style.margin = '0';
             clonedWrapper.style.padding = '0';
+            clonedWrapper.style.width = '210mm';
+            clonedWrapper.style.height = '297mm';
           }
+
           const clonedEl = clonedDoc.getElementById(elementId);
           if (clonedEl) {
             // Remove preview-only shadow and ensure pure A4 margins
             clonedEl.style.boxShadow = 'none';
-            clonedEl.style.margin = '0 auto';
+            clonedEl.style.margin = '0';
+            clonedEl.style.position = 'absolute';
+            clonedEl.style.top = '0';
+            clonedEl.style.left = '0';
             clonedEl.style.transform = 'none';
             clonedEl.style.width = '210mm';
             clonedEl.style.height = '297mm';
@@ -418,16 +466,6 @@ export async function downloadCoverPagePdf(options: {
     } finally {
       unpatchGlobalWindow();
     }
-
-    console.log('PDF_DEBUG_CANVAS:', {
-      canvasWidth: canvas.width,
-      canvasHeight: canvas.height,
-      elementClientWidth: element.clientWidth,
-      elementClientHeight: element.clientHeight,
-      elementOffsetWidth: element.offsetWidth,
-      elementOffsetHeight: element.offsetHeight,
-      elementRect: element.getBoundingClientRect(),
-    });
 
     const imgDataUrl = canvas.toDataURL('image/png', 1.0);
     if (!imgDataUrl || imgDataUrl === 'data:,') {

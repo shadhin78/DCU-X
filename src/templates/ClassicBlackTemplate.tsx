@@ -71,10 +71,16 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
 
           <div className="w-full max-w-[340px] mx-auto my-3 flex items-center justify-center">
             <div className="h-[1px] bg-slate-950 flex-1" />
-            <div className="mx-3 flex items-center gap-1 text-slate-950">
-              <span className="w-1.5 h-1.5 rotate-45 border border-slate-950 inline-block" />
-              <span className="w-2.5 h-2.5 rotate-45 bg-slate-950 inline-block" />
-              <span className="w-1.5 h-1.5 rotate-45 border border-slate-950 inline-block" />
+            <div className="mx-3 flex items-center gap-1.5 text-slate-950">
+              <svg className="w-2 h-2 text-slate-950 shrink-0" viewBox="0 0 8 8" fill="none" stroke="currentColor" strokeWidth="1">
+                <polygon points="4,0.5 7.5,4 4,7.5 0.5,4" />
+              </svg>
+              <svg className="w-3 h-3 text-slate-950 shrink-0" viewBox="0 0 10 10" fill="currentColor">
+                <polygon points="5,0.5 9.5,5 5,9.5 0.5,5" />
+              </svg>
+              <svg className="w-2 h-2 text-slate-950 shrink-0" viewBox="0 0 8 8" fill="none" stroke="currentColor" strokeWidth="1">
+                <polygon points="4,0.5 7.5,4 4,7.5 0.5,4" />
+              </svg>
             </div>
             <div className="h-[1px] bg-slate-950 flex-1" />
           </div>

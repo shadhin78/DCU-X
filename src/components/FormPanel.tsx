@@ -736,42 +736,17 @@ export const FormPanel: React.FC<FormPanelProps> = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-          {onPrint && (
-            <button
-              type="button"
-              id="form-bottom-btn-print"
-              onClick={onPrint}
-              className="w-full inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border border-slate-300 rounded-lg shadow-2xs transition-colors cursor-pointer"
-              title="Open browser print dialog"
-            >
-              <Printer className="w-4 h-4 text-slate-600 shrink-0" />
-              <span>Print Cover</span>
-            </button>
-          )}
-
-          {onDownloadPdf && (
-            <button
-              type="button"
-              id="form-bottom-btn-download-pdf"
-              onClick={onDownloadPdf}
-              disabled={isGeneratingPdf}
-              className="w-full inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 rounded-lg shadow-xs transition-all cursor-pointer"
-              title="Download A4 Cover Page as PDF"
-            >
-              {isGeneratingPdf ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-                  <span>Generating...</span>
-                </>
-              ) : (
-                <>
-                  <Download className="w-4 h-4 shrink-0" />
-                  <span>Download PDF</span>
-                </>
-              )}
-            </button>
-          )}
+        <div>
+          <button
+            type="button"
+            id="form-bottom-btn-download-pdf"
+            onClick={onPrint}
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-xs transition-all cursor-pointer"
+            title="Download A4 Cover Page as PDF or Print"
+          >
+            <Download className="w-4 h-4 shrink-0" />
+            <span>Download PDF</span>
+          </button>
         </div>
       </div>
     </div>

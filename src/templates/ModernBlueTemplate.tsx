@@ -63,7 +63,9 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           {/* Horizontal Divider with Centered Diamond Symbol */}
           <div className="w-full max-w-[490px] mx-auto flex items-center justify-center my-2.5">
             <div className="h-[1px] bg-slate-300 flex-1" />
-            <div className="mx-2.5 w-2.5 h-2.5 rotate-45 border border-slate-500 bg-white shrink-0" />
+            <svg className="mx-2.5 w-2.5 h-2.5 text-slate-500 shrink-0" viewBox="0 0 10 10" fill="white" stroke="currentColor" strokeWidth="1">
+              <polygon points="5,0.7 9.3,5 5,9.3 0.7,5" />
+            </svg>
             <div className="h-[1px] bg-slate-300 flex-1" />
           </div>
         </div>
