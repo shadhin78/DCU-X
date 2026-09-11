@@ -38,7 +38,13 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
     }
     return 0.82;
   });
-  const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>('side-by-side');
+  const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>(() => {
+    if (typeof window !== 'undefined') {
+      const urlLayout = new URLSearchParams(window.location.search).get('layout');
+      if (urlLayout === 'stacked' || urlLayout === 'side-by-side') return urlLayout;
+    }
+    return 'side-by-side';
+  });
   const [logoError, setLogoError] = useState<boolean>(false);
 
   // Resolve current department and its custom template if available
@@ -49,6 +55,17 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   // Active template state:
   // Default to 'special' if current department has a special template, otherwise 'modern-blue'
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateStyle>(() => {
+    if (typeof window !== 'undefined') {
+      const urlTemplate = new URLSearchParams(window.location.search).get('template') as TemplateStyle | null;
+      if (
+        urlTemplate === 'modern-blue' ||
+        urlTemplate === 'classic-black' ||
+        urlTemplate === 'special' ||
+        urlTemplate === 'accounting-sheet'
+      ) {
+        return urlTemplate;
+      }
+    }
     return deptTemplate ? 'special' : 'modern-blue';
   });
 
@@ -56,6 +73,10 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   const prevDeptRef = useRef<string>(currentDept);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlTemplate = new URLSearchParams(window.location.search).get('template');
+      if (urlTemplate) return;
+    }
     if (prevDeptRef.current !== currentDept) {
       prevDeptRef.current = currentDept;
       if (deptTemplate) {
@@ -271,7 +292,7 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
                         backgroundColor: '#ffffff',
                       }
                 }
-                className="w-[210mm] h-[297mm] min-h-[297mm] max-h-[297mm] text-slate-950 shadow-2xl mx-auto relative box-border overflow-hidden select-text flex flex-col justify-between print:shadow-none print:m-0"
+                className="w-[210mm] h-[297mm] min-h-[297mm] max-h-[297mm] text-slate-950 shadow-2xl mx-auto relative box-border overflow-hidden select-text flex flex-col justify-between print:shadow-none print:m-0 print:w-[210mm] print:h-[297mm] print:min-h-[297mm] print:max-h-[297mm]"
               >
                 {/* Background template image layer for guaranteed crisp PDF export & print rendering */}
                 {isSpecialActive && deptTemplate && (

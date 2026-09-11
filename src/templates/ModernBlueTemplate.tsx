@@ -34,22 +34,22 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
         <div className="absolute bottom-[1.5mm] right-[1.5mm] w-1.5 h-1.5 bg-[#1e3a8a]" />
       </div>
 
-      {/* Content Container (Inside Safe A4 Print Margin) */}
-      <div className="page-frame relative z-20 w-full h-full px-[18mm] py-[15mm] flex flex-col justify-between box-border">
+      {/* Inner Margin Border and Scaled Frame Padding */}
+      <div className="page-frame relative z-20 w-full h-full px-[18mm] pt-[11mm] pb-[14mm] flex flex-col justify-between box-border">
         {/* TOP SECTION: Centered College Crest + Academic Header */}
-        <div className="flex flex-col items-center pt-1 text-center">
+        <div className="flex flex-col items-center pt-0.5 text-center shrink-0">
           {/* Logo Area */}
-          <div className="h-[76px] flex items-center justify-center mb-2">
+          <div className="h-[66px] flex items-center justify-center mb-1.5">
             {!logoError ? (
               <img
                 src="/logo.png"
                 alt="Government Titumir College Logo"
                 crossOrigin="anonymous"
                 onError={onLogoError}
-                className="h-[74px] w-auto max-w-[95px] object-contain drop-shadow-2xs"
+                className="h-[64px] w-auto max-w-[90px] object-contain drop-shadow-2xs"
               />
             ) : (
-              <div className="w-[66px] h-[66px] rounded-full border-2 border-[#1e3a8a] flex flex-col items-center justify-center bg-blue-50 text-[#1e3a8a] shadow-2xs">
+              <div className="w-[62px] h-[62px] rounded-full border-2 border-[#1e3a8a] flex flex-col items-center justify-center bg-blue-50 text-[#1e3a8a] shadow-2xs">
                 <span className="font-cinzel text-[11px] font-bold">GTC</span>
                 <span className="text-[7.5px] uppercase tracking-wider font-semibold">1968</span>
               </div>
@@ -57,27 +57,27 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           </div>
 
           {/* College Title */}
-          <h1 className="font-academic font-black text-[23px] tracking-[0.04em] text-[#1e3a8a] uppercase leading-tight">
+          <h1 className="font-academic font-black text-[21px] tracking-[0.04em] text-[#1e3a8a] uppercase leading-tight">
             {data.institution.collegeName || 'GOVERNMENT TITUMIR COLLEGE'}
           </h1>
-          <p className="font-sans text-[11.5px] tracking-[0.22em] font-bold text-[#2563eb] uppercase mt-1">
+          <p className="font-sans text-[11px] tracking-[0.22em] font-bold text-[#2563eb] uppercase mt-0.5">
             Dhaka Central University
           </p>
 
           {/* Faculty and Department */}
-          <div className="mt-2 space-y-0.5">
+          <div className="mt-1.5 space-y-0.5">
             {data.institution.faculty && (
-              <p className="font-sans text-[12px] font-semibold text-[#475569] uppercase tracking-widest">
+              <p className="font-sans text-[11.5px] font-semibold text-[#475569] uppercase tracking-widest">
                 {data.institution.faculty}
               </p>
             )}
-            <h2 className="font-academic font-bold text-[17px] text-[#0f172a] tracking-wide">
+            <h2 className="font-academic font-bold text-[16px] text-[#0f172a] tracking-wide">
               Department of {data.institution.department || '____________________'}
             </h2>
           </div>
 
           {/* Horizontal Divider with Centered Diamond Motif */}
-          <div className="w-full max-w-[380px] mx-auto flex items-center justify-center my-2.5">
+          <div className="w-full max-w-[380px] mx-auto flex items-center justify-center my-2">
             <div className="h-[1px] bg-[#1e3a8a]/35 flex-1" />
             <div className="mx-2.5 flex items-center gap-1 text-[#1e3a8a]">
               <div className="w-1.5 h-1.5 rotate-45 border border-[#1e3a8a] bg-white" />
@@ -89,15 +89,15 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
         </div>
 
         {/* MIDDLE SECTION: Assignment Title, Course Card, Submission Information */}
-        <div className="page-content w-full max-w-[535px] mx-auto box-border flex flex-col gap-4">
+        <div className="page-content w-full max-w-[535px] mx-auto box-border flex flex-col gap-3">
           {/* ASSIGNMENT HEADER */}
           <div className="assignment-header w-full box-border flex flex-col items-center justify-center m-0 text-center">
-            <h3 className="font-academic font-black text-[24px] tracking-[0.25em] text-[#0f172a] uppercase mx-auto">
+            <h3 className="font-academic font-black text-[23px] tracking-[0.25em] text-[#0f172a] uppercase mx-auto">
               A S S I G N M E N T
             </h3>
 
-            <div className="mt-2 inline-block border-2 border-[#1e3a8a] rounded-lg px-7 py-1 bg-blue-50/60 shadow-2xs mx-auto">
-              <span className="font-sans text-[14px] font-bold text-[#1e3a8a] tracking-wide">
+            <div className="mt-1.5 inline-block border-2 border-[#1e3a8a] rounded-lg px-6 py-0.5 bg-blue-50/60 shadow-2xs mx-auto">
+              <span className="font-sans text-[13.5px] font-bold text-[#1e3a8a] tracking-wide">
                 {data.course.assignmentNo
                   ? `Assignment No: ${data.course.assignmentNo}`
                   : 'Assignment No: 01'}
@@ -106,26 +106,26 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           </div>
 
           {/* COURSE DETAILS CARD */}
-          <div className="course-card w-full box-border bg-[#f8fafc] rounded-xl px-5 py-3 border border-blue-200/90 shadow-2xs divide-y divide-slate-200/75">
-            <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1.5 text-[14px]">
+          <div className="course-card w-full box-border bg-[#f8fafc] rounded-xl px-5 py-2 border border-blue-200/90 shadow-2xs divide-y divide-slate-200/75">
+            <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
               <span className="font-bold text-[#334155]">Course Code</span>
               <span className="font-bold text-[#64748b]">:</span>
-              <span className="font-mono font-bold text-[#0f172a] text-[15px]">
+              <span className="font-mono font-bold text-[#0f172a] text-[14.5px]">
                 {data.course.courseCode || ''}
               </span>
             </div>
-            <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1.5 text-[14px]">
+            <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
               <span className="font-bold text-[#334155]">Course Title</span>
               <span className="font-bold text-[#64748b]">:</span>
-              <span className="font-semibold text-[#0f172a] text-[15px]">
+              <span className="font-semibold text-[#0f172a] text-[14.5px]">
                 {data.course.courseTitle || ''}
               </span>
             </div>
             {data.course.assignmentTitle && (
-              <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1.5 text-[14px]">
+              <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
                 <span className="font-bold text-[#334155]">Assignment Title</span>
                 <span className="font-bold text-[#64748b]">:</span>
-                <span className="font-bold text-[#0f172a] text-[15px] leading-snug">
+                <span className="font-bold text-[#0f172a] text-[14.5px] leading-snug">
                   {data.course.assignmentTitle}
                 </span>
               </div>
@@ -137,52 +137,52 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
             className={`submission-section w-full box-border ${
               layoutStyle === 'side-by-side'
                 ? 'is-side-by-side grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-4 items-stretch'
-                : 'space-y-3'
+                : 'space-y-2.5'
             }`}
           >
             {layoutStyle === 'side-by-side' ? (
               <>
                 {/* Left Column: SUBMITTED BY */}
-                <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs flex flex-col justify-between">
+                <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3 bg-white shadow-2xs flex flex-col justify-between">
                   <div>
-                    <div className="border-b border-blue-200 pb-1 mb-2">
-                      <h4 className="font-sans font-bold text-[13px] text-[#1e3a8a] uppercase tracking-wider">
+                    <div className="border-b border-blue-200 pb-1 mb-1.5">
+                      <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
                         SUBMITTED BY
                       </h4>
                     </div>
-                    <div className="space-y-1.5 font-sans">
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13.5px]">
+                    <div className="space-y-1 font-sans">
+                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Name</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="font-bold text-[#0f172a] text-[15px] leading-tight">
+                        <span className="font-bold text-[#0f172a] text-[14px] leading-tight">
                           {data.student.name || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Roll</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="font-mono font-bold text-[#0f172a] text-[14.5px]">
+                        <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">
                           {data.student.roll || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">ID</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="font-mono font-bold text-[#0f172a] text-[14.5px]">
+                        <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">
                           {data.student.studentId || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Dept</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="text-[#0f172a] font-medium text-[14px]">
+                        <span className="text-[#0f172a] font-medium text-[13px]">
                           {data.student.department || data.institution.department || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[48px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Year</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="text-[#0f172a] font-medium text-[14px]">
+                        <span className="text-[#0f172a] font-medium text-[13px]">
                           {data.student.year || data.student.semester || ''}
                         </span>
                       </div>
@@ -191,32 +191,32 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                 </div>
 
                 {/* Right Column: SUBMITTED TO */}
-                <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs flex flex-col justify-between">
+                <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3 bg-white shadow-2xs flex flex-col justify-between">
                   <div>
-                    <div className="border-b border-blue-200 pb-1 mb-2">
-                      <h4 className="font-sans font-bold text-[13px] text-[#1e3a8a] uppercase tracking-wider">
+                    <div className="border-b border-blue-200 pb-1 mb-1.5">
+                      <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
                         SUBMITTED TO
                       </h4>
                     </div>
-                    <div className="space-y-1.5 font-sans">
-                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13.5px]">
+                    <div className="space-y-1 font-sans">
+                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Name</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="font-bold text-[#0f172a] text-[15px] leading-tight">
+                        <span className="font-bold text-[#0f172a] text-[14px] leading-tight">
                           {data.teacher.name || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Designation</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="text-[#0f172a] font-medium text-[14px]">
+                        <span className="text-[#0f172a] font-medium text-[13px]">
                           {data.teacher.designation || ''}
                         </span>
                       </div>
-                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13.5px]">
+                      <div className="grid grid-cols-[76px_8px_1fr] items-baseline text-[13px]">
                         <span className="text-[#475569] font-bold">Department</span>
                         <span className="text-[#64748b] font-bold">:</span>
-                        <span className="text-[#0f172a] font-medium text-[14px] leading-snug">
+                        <span className="text-[#0f172a] font-medium text-[13px] leading-snug">
                           {data.teacher.department || ''}
                         </span>
                       </div>
@@ -227,66 +227,66 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
             ) : (
               /* Stacked Mode */
               <>
-                <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs">
-                  <div className="border-b border-blue-200 pb-1 mb-2">
-                    <h4 className="font-sans font-bold text-[13px] text-[#1e3a8a] uppercase tracking-wider">
+                <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-2.5 bg-white shadow-2xs">
+                  <div className="border-b border-blue-200 pb-1 mb-1.5">
+                    <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
                       SUBMITTED BY
                     </h4>
                   </div>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 font-sans text-[13.5px]">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-1 font-sans text-[13px]">
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Name</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-bold text-[#0f172a] text-[15px]">{data.student.name || ''}</span>
+                      <span className="font-bold text-[#0f172a] text-[14px]">{data.student.name || ''}</span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Roll</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-mono font-bold text-[#0f172a] text-[14.5px]">{data.student.roll || ''}</span>
+                      <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">ID</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-mono font-bold text-[#0f172a] text-[14.5px]">{data.student.studentId || ''}</span>
+                      <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">{data.student.studentId || ''}</span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Year</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[14px]">
+                      <span className="text-[#0f172a] font-medium text-[13px]">
                         {data.student.year || data.student.semester || ''}
                       </span>
                     </div>
                     <div className="grid grid-cols-[48px_8px_1fr] items-baseline col-span-2">
                       <span className="text-[#475569] font-bold">Dept</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[14px]">
+                      <span className="text-[#0f172a] font-medium text-[13px]">
                         {data.student.department || data.institution.department || ''}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs">
-                  <div className="border-b border-blue-200 pb-1 mb-2">
-                    <h4 className="font-sans font-bold text-[13px] text-[#1e3a8a] uppercase tracking-wider">
+                <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-2.5 bg-white shadow-2xs">
+                  <div className="border-b border-blue-200 pb-1 mb-1.5">
+                    <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
                       SUBMITTED TO
                     </h4>
                   </div>
-                  <div className="space-y-1.5 font-sans text-[13.5px]">
+                  <div className="space-y-1 font-sans text-[13px]">
                     <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Name</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-bold text-[#0f172a] text-[15px]">{data.teacher.name || ''}</span>
+                      <span className="font-bold text-[#0f172a] text-[14px]">{data.teacher.name || ''}</span>
                     </div>
                     <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Designation</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[14px]">{data.teacher.designation || ''}</span>
+                      <span className="text-[#0f172a] font-medium text-[13px]">{data.teacher.designation || ''}</span>
                     </div>
                     <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Department</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[14px]">
+                      <span className="text-[#0f172a] font-medium text-[13px]">
                         {data.teacher.department || ''}
                       </span>
                     </div>
@@ -298,10 +298,10 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
         </div>
 
         {/* BOTTOM SECTION: Full-Width Separator + Submission Date */}
-        <div className="w-full max-w-[535px] mx-auto pt-2.5 pb-1 border-t border-[#1e3a8a]/20 text-center">
-          <p className="font-sans text-[14px] text-[#475569]">
+        <div className="w-full max-w-[535px] mx-auto pt-2 pb-0.5 border-t border-[#1e3a8a]/20 text-center shrink-0">
+          <p className="font-sans text-[13.5px] text-[#475569]">
             Date of Submission:{' '}
-            <span className="font-bold text-[#0f172a] text-[14.5px]">
+            <span className="font-bold text-[#0f172a] text-[14px]">
               {formattedDate || 'DD/MM/YYYY'}
             </span>
           </p>
