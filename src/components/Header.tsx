@@ -32,14 +32,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <h1 className="text-xs sm:text-base font-bold text-slate-900 leading-tight truncate">
-                Titumir Assignment Cover Generator
+                DCU Assignment Cover Generator
               </h1>
               <span className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shrink-0">
-                GTC Dhaka
+                DCU
               </span>
             </div>
             <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">
-              Government Titumir College • Dhaka Central University
+              Dhaka Central University
             </p>
           </div>
         </div>
