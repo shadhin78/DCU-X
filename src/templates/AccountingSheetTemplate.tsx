@@ -72,10 +72,10 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
         </h2>
 
         <div className="mt-2 mb-4 inline-block border-2 border-slate-950 rounded-lg px-6 py-1.5 bg-white shadow-2xs">
-          <span className="font-sans text-[13.5px] font-bold tracking-wider text-slate-950 uppercase">
+          <span className="font-sans text-[13.5px] font-bold tracking-wider text-slate-950">
             {data.course.assignmentNo
-              ? `Assignment No : ${data.course.assignmentNo}`
-              : 'Assignment No : ____'}
+              ? `Assignment No: ${data.course.assignmentNo}`
+              : 'Assignment No: ____'}
           </span>
         </div>
 
@@ -110,49 +110,12 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
       <div className="my-2">
         {layoutStyle === 'side-by-side' ? (
           <div className="grid grid-cols-2 gap-6 items-start">
-            {/* Left: Submitted To */}
+            {/* Left: Submitted By */}
             <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white/95 shadow-2xs min-h-[168px] flex flex-col justify-between backdrop-blur-xs">
               <div>
                 <div className="border-b-2 border-slate-950 pb-1 mb-2.5">
                   <h3 className="font-cinzel font-bold text-[13px] text-slate-950 uppercase tracking-wider">
-                    Submitted To :
-                  </h3>
-                </div>
-                <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
-                    <span className="font-bold text-slate-950">Name</span>
-                    <span className="font-bold text-slate-950">:</span>
-                    <span className="font-bold text-slate-950">{data.teacher.name || ''}</span>
-                  </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
-                    <span className="font-bold text-slate-950">Designation</span>
-                    <span className="font-bold text-slate-950">:</span>
-                    <span className="text-slate-900">{data.teacher.designation || ''}</span>
-                  </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
-                    <span className="font-bold text-slate-950">Department</span>
-                    <span className="font-bold text-slate-950">:</span>
-                    <span className="text-slate-900">
-                      {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
-                    <span className="font-bold text-slate-950">College</span>
-                    <span className="font-bold text-slate-950">:</span>
-                    <span className="text-slate-800 text-[11.5px]">
-                      {data.institution.collegeName || ''}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Submitted By */}
-            <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white/95 shadow-2xs min-h-[168px] flex flex-col justify-between backdrop-blur-xs">
-              <div>
-                <div className="border-b-2 border-slate-950 pb-1 mb-2.5">
-                  <h3 className="font-cinzel font-bold text-[13px] text-slate-950 uppercase tracking-wider">
-                    Submitted By :
+                    Submitted By
                   </h3>
                 </div>
                 <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
@@ -186,6 +149,43 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
                 </div>
               </div>
             </div>
+
+            {/* Right: Submitted To */}
+            <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white/95 shadow-2xs min-h-[168px] flex flex-col justify-between backdrop-blur-xs">
+              <div>
+                <div className="border-b-2 border-slate-950 pb-1 mb-2.5">
+                  <h3 className="font-cinzel font-bold text-[13px] text-slate-950 uppercase tracking-wider">
+                    Submitted To
+                  </h3>
+                </div>
+                <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
+                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                    <span className="font-bold text-slate-950">Name</span>
+                    <span className="font-bold text-slate-950">:</span>
+                    <span className="font-bold text-slate-950">{data.teacher.name || ''}</span>
+                  </div>
+                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                    <span className="font-bold text-slate-950">Designation</span>
+                    <span className="font-bold text-slate-950">:</span>
+                    <span className="text-slate-900">{data.teacher.designation || ''}</span>
+                  </div>
+                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                    <span className="font-bold text-slate-950">Department</span>
+                    <span className="font-bold text-slate-950">:</span>
+                    <span className="text-slate-900">
+                      {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-[72px_10px_1fr] items-baseline">
+                    <span className="font-bold text-slate-950">College</span>
+                    <span className="font-bold text-slate-950">:</span>
+                    <span className="text-slate-800 text-[11.5px]">
+                      {data.institution.collegeName || ''}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           /* Stacked */
@@ -193,7 +193,7 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
             <div className="border border-slate-900 rounded-lg p-3 bg-white/95 shadow-2xs backdrop-blur-xs">
               <div className="border-b border-slate-950 pb-1 mb-2">
                 <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
-                  Submitted By :
+                  Submitted By
                 </h3>
               </div>
               <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-academic text-[12px]">
@@ -223,7 +223,7 @@ export const AccountingSheetTemplate: React.FC<TemplateProps> = ({
             <div className="border border-slate-900 rounded-lg p-3 bg-white/95 shadow-2xs backdrop-blur-xs">
               <div className="border-b border-slate-950 pb-1 mb-2">
                 <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
-                  Submitted To :
+                  Submitted To
                 </h3>
               </div>
               <div className="space-y-1 font-academic text-[12px]">
