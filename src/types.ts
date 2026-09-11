@@ -16,8 +16,9 @@ export interface StudentInfo {
   studentId: string;
   department: string;
   roll: string;
-  batch: string;
-  semester: string;
+  year?: string;
+  batch?: string;
+  semester?: string;
 }
 
 export interface TeacherInfo {

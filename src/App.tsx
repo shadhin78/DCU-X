@@ -75,14 +75,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
-      {/* Main Header with Required Buttons and "Saved locally" Status */}
+      {/* Main Header with Action Buttons */}
       <Header
         onPrint={handlePrint}
         onDownloadPdf={handleDownloadPdf}
         onPreview={handleScrollToPreview}
         isGeneratingPdf={isGeneratingPdf}
         onReset={handleResetWithConfirm}
-        onLoadSample={fillSampleData}
         lastSaved={lastSaved}
       />
 
@@ -129,9 +128,6 @@ export default function App() {
               onUpdateDates={updateDates}
               onSyncStudentDept={syncStudentDepartment}
               onSyncTeacherDept={syncTeacherDepartment}
-              onReset={handleResetWithConfirm}
-              onLoadSample={fillSampleData}
-              onPreview={handleScrollToPreview}
               onPrint={handlePrint}
               onDownloadPdf={handleDownloadPdf}
               isGeneratingPdf={isGeneratingPdf}
@@ -143,12 +139,7 @@ export default function App() {
             id="a4-preview-section"
             className="lg:col-span-7 xl:col-span-7 w-full lg:sticky lg:top-4 self-start"
           >
-            <A4PreviewPanel
-              data={data}
-              onPrint={handlePrint}
-              onDownloadPdf={handleDownloadPdf}
-              isGeneratingPdf={isGeneratingPdf}
-            />
+            <A4PreviewPanel data={data} />
           </div>
         </div>
       </main>

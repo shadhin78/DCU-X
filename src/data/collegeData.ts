@@ -97,8 +97,9 @@ export const INITIAL_SAMPLE_DATA: CoverPageData = {
     studentId: '2022-PHY-045',
     department: 'Physics',
     roll: '723849',
-    batch: '53rd Batch',
-    semester: '5th Semester',
+    year: '2nd Year',
+    semester: '2nd Year',
+    batch: '',
   },
   teacher: {
     name: 'Prof. Dr. Mohammad Rafiqul Islam',
@@ -127,8 +128,9 @@ export const BLANK_COVER_DATA: CoverPageData = {
     studentId: '',
     department: 'Physics',
     roll: '',
+    year: '1st Year',
+    semester: '1st Year',
     batch: '',
-    semester: '',
   },
   teacher: {
     name: '',

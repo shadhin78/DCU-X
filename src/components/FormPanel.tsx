@@ -5,14 +5,10 @@ import {
   User,
   GraduationCap,
   Calendar,
-  RotateCcw,
-  Sparkles,
   Link,
   ChevronDown,
-  ChevronsUpDown,
   Printer,
   Download,
-  Eye,
   Loader2,
 } from 'lucide-react';
 import {
@@ -34,8 +30,8 @@ interface FormPanelProps {
   onUpdateDates: (fields: Partial<DatesInfo>) => void;
   onSyncStudentDept: () => void;
   onSyncTeacherDept: () => void;
-  onReset: () => void;
-  onLoadSample: () => void;
+  onReset?: () => void;
+  onLoadSample?: () => void;
   onPreview?: () => void;
   onPrint?: () => void;
   onDownloadPdf?: () => void;
@@ -72,19 +68,6 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       ...prev,
       [section]: !prev[section],
     }));
-  };
-
-  const allExpanded = Object.values(openSections).every(Boolean);
-
-  const toggleAllSections = () => {
-    const nextState = !allExpanded;
-    setOpenSections({
-      institution: nextState,
-      course: nextState,
-      student: nextState,
-      teacher: nextState,
-      dates: nextState,
-    });
   };
 
   const currentFacultyName = normalizeFaculty(data.institution.faculty);
@@ -126,138 +109,14 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Editor Header Bar with Status Indicator & Actions */}
+      {/* Editor Header Bar */}
       <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm sm:text-base font-bold text-slate-900">
-                Assignment Cover Editor
-              </h2>
-              {/* Small status indicator: "Saved locally" */}
-              <span
-                id="editor-status-saved-locally"
-                className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200/80 shadow-2xs"
-                title="All information is stored locally in your browser (no cloud sync or server upload)"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
-                </span>
-                <span className="font-semibold text-[11px]">Saved locally</span>
-              </span>
-            </div>
-            <p className="text-[11.5px] text-slate-500 mt-0.5">
-              Fill in the fields below. Live A4 cover page updates instantly.
-            </p>
-          </div>
-
-          {/* Quick Toolbar: Expand All, Sample, Reset */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <button
-              type="button"
-              id="form-btn-toggle-all"
-              onClick={toggleAllSections}
-              className="px-2.5 py-1 text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer"
-              title={allExpanded ? 'Collapse all sections' : 'Expand all sections'}
-            >
-              <ChevronsUpDown className="w-3.5 h-3.5" />
-              <span>{allExpanded ? 'Collapse All' : 'Expand All'}</span>
-            </button>
-
-            <button
-              type="button"
-              id="form-btn-sample"
-              onClick={onLoadSample}
-              className="px-2.5 py-1 text-xs font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer"
-              title="Populate with realistic sample data"
-            >
-              <Sparkles className="w-3 h-3 text-emerald-600" />
-              <span>Sample</span>
-            </button>
-
-            <button
-              type="button"
-              id="form-btn-reset"
-              onClick={onReset}
-              className="px-2.5 py-1 text-xs font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer"
-              title="Reset all form fields"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset</span>
-            </button>
-
-            {onDownloadPdf && (
-              <button
-                type="button"
-                id="form-btn-download-pdf-top"
-                onClick={onDownloadPdf}
-                disabled={isGeneratingPdf}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 rounded-lg shadow-xs transition-colors cursor-pointer"
-                title="Generate and download A4 Cover Page as PDF"
-              >
-                {isGeneratingPdf ? (
-                  <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    <span>Generating...</span>
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Download PDF</span>
-                  </>
-                )}
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile Quick Action Buttons: Preview, Print, Download PDF, Reset */}
-        <div className="lg:hidden mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
-          {onPreview && (
-            <button
-              type="button"
-              id="mobile-btn-preview"
-              onClick={onPreview}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg transition-colors cursor-pointer"
-            >
-              <Eye className="w-3.5 h-3.5" />
-              <span>Preview</span>
-            </button>
-          )}
-          {onPrint && (
-            <button
-              type="button"
-              id="mobile-btn-print"
-              onClick={onPrint}
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg transition-colors cursor-pointer"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>Print</span>
-            </button>
-          )}
-          {onDownloadPdf && (
-            <button
-              type="button"
-              id="mobile-btn-download"
-              onClick={onDownloadPdf}
-              disabled={isGeneratingPdf}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-60 rounded-lg shadow-xs transition-colors cursor-pointer"
-            >
-              {isGeneratingPdf ? (
-                <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Generating...</span>
-                </>
-              ) : (
-                <>
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download PDF</span>
-                </>
-              )}
-            </button>
-          )}
-        </div>
+        <h2 className="text-sm sm:text-base font-bold text-slate-900">
+          Assignment Cover Editor
+        </h2>
+        <p className="text-[11.5px] text-slate-500 mt-0.5">
+          Fill in the fields below. Live A4 cover page updates instantly.
+        </p>
       </div>
 
       {/* ====================================================================
@@ -637,7 +496,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label
                   htmlFor="input-student-roll"
@@ -659,35 +518,30 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               </div>
               <div>
                 <label
-                  htmlFor="input-student-batch"
+                  htmlFor="select-student-year"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  Batch
+                  Year{' '}
+                  <span className="text-rose-500 font-bold" title="Required field">
+                    *
+                  </span>
                 </label>
-                <input
-                  type="text"
-                  id="input-student-batch"
-                  value={data.student.batch}
-                  onChange={(e) => onUpdateStudent({ batch: e.target.value })}
-                  placeholder="e.g. 53rd Batch"
-                  className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 transition-shadow"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="input-student-semester"
-                  className="block text-xs font-semibold text-slate-700 mb-1"
+                <select
+                  id="select-student-year"
+                  value={data.student.year || data.student.semester || '1st Year'}
+                  onChange={(e) =>
+                    onUpdateStudent({
+                      year: e.target.value,
+                      semester: e.target.value,
+                    })
+                  }
+                  className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white text-slate-900 transition-shadow cursor-pointer"
                 >
-                  Semester
-                </label>
-                <input
-                  type="text"
-                  id="input-student-semester"
-                  value={data.student.semester}
-                  onChange={(e) => onUpdateStudent({ semester: e.target.value })}
-                  placeholder="e.g. 5th Semester"
-                  className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 transition-shadow"
-                />
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                </select>
               </div>
             </div>
           </div>
@@ -874,25 +728,25 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       </div>
 
       {/* Primary Export Actions Card */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200/90 shadow-xs space-y-3">
         <div>
-          <span className="text-xs font-bold text-slate-800 block">Ready to Export?</span>
-          <p className="text-[11px] text-slate-500 mt-0.5">
-            Generates a crisp, single-page A4 portrait PDF locally.
+          <span className="text-sm font-bold text-slate-800 block">Ready to Export?</span>
+          <p className="text-[11.5px] text-slate-500 mt-0.5">
+            Generates a crisp, single-page A4 portrait PDF locally or prints directly.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
           {onPrint && (
             <button
               type="button"
               id="form-bottom-btn-print"
               onClick={onPrint}
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg transition-colors cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border border-slate-300 rounded-lg shadow-2xs transition-colors cursor-pointer"
               title="Open browser print dialog"
             >
-              <Printer className="w-3.5 h-3.5 text-slate-600" />
-              <span>Print</span>
+              <Printer className="w-4 h-4 text-slate-600 shrink-0" />
+              <span>Print Cover</span>
             </button>
           )}
 
@@ -902,17 +756,17 @@ export const FormPanel: React.FC<FormPanelProps> = ({
               id="form-bottom-btn-download-pdf"
               onClick={onDownloadPdf}
               disabled={isGeneratingPdf}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 rounded-lg shadow-xs transition-all cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 rounded-lg shadow-xs transition-all cursor-pointer"
               title="Download A4 Cover Page as PDF"
             >
               {isGeneratingPdf ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Generating PDF...</span>
+                  <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                  <span>Generating...</span>
                 </>
               ) : (
                 <>
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 shrink-0" />
                   <span>Download PDF</span>
                 </>
               )}

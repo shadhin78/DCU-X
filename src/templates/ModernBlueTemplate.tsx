@@ -48,7 +48,7 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                 C O L L E G E
               </div>
               <p className="font-academic italic text-[11.5px] text-[#2563eb] mt-1.5 tracking-normal">
-                Affiliated with University of Dhaka
+                Dhaka Central University
               </p>
             </div>
           </div>
@@ -139,12 +139,8 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                     </span>
                   </div>
                   <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">Batch:</span>
-                    <span className="text-slate-800">{data.student.batch || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium min-w-[58px]">Semester:</span>
-                    <span className="text-slate-800">{data.student.semester || ''}</span>
+                    <span className="text-[#64748b] font-medium min-w-[58px]">Year:</span>
+                    <span className="text-slate-800">{data.student.year || data.student.semester || ''}</span>
                   </div>
                 </div>
               </div>
@@ -201,12 +197,8 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
                     <span className="text-slate-900 font-mono">{data.student.roll || ''}</span>
                   </div>
                   <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">Batch:</span>
-                    <span className="text-slate-900">{data.student.batch || ''}</span>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <span className="text-[#64748b] font-medium">Semester:</span>
-                    <span className="text-slate-900">{data.student.semester || ''}</span>
+                    <span className="text-[#64748b] font-medium">Year:</span>
+                    <span className="text-slate-900">{data.student.year || data.student.semester || ''}</span>
                   </div>
                 </div>
               </div>

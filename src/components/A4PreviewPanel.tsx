@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Printer,
   ZoomIn,
   ZoomOut,
   Columns,
@@ -8,12 +7,8 @@ import {
   Sparkles,
   Award,
   FileSpreadsheet,
-  Download,
-  Loader2,
-  CheckCircle2,
 } from 'lucide-react';
 import { CoverPageData } from '../types';
-import { downloadCoverPagePdf } from '../utils/pdfExport';
 import {
   TemplateStyle,
   LayoutStyle,
@@ -26,16 +21,13 @@ export type { TemplateStyle };
 
 interface A4PreviewPanelProps {
   data: CoverPageData;
-  onPrint: () => void;
+  onPrint?: () => void;
   onDownloadPdf?: () => void;
   isGeneratingPdf?: boolean;
 }
 
 export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   data,
-  onPrint,
-  onDownloadPdf,
-  isGeneratingPdf = false,
 }) => {
   const [zoomLevel, setZoomLevel] = useState<number>(() => {
     if (typeof window !== 'undefined') {
@@ -47,44 +39,6 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   });
   const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>('side-by-side');
   const [logoError, setLogoError] = useState<boolean>(false);
-  const [localDownloading, setLocalDownloading] = useState<boolean>(false);
-  const [downloadSuccess, setDownloadSuccess] = useState<boolean>(false);
-
-  const prevGeneratingRef = React.useRef(isGeneratingPdf);
-  useEffect(() => {
-    if (prevGeneratingRef.current && !isGeneratingPdf) {
-      setDownloadSuccess(true);
-      const timer = setTimeout(() => setDownloadSuccess(false), 3500);
-      return () => clearTimeout(timer);
-    }
-    prevGeneratingRef.current = isGeneratingPdf;
-  }, [isGeneratingPdf]);
-
-  const isDownloading = isGeneratingPdf || localDownloading;
-
-  const handleInternalDownloadPdf = async () => {
-    if (isDownloading) return;
-    if (onDownloadPdf) {
-      onDownloadPdf();
-      return;
-    }
-
-    setLocalDownloading(true);
-    setDownloadSuccess(false);
-    try {
-      await downloadCoverPagePdf({
-        studentName: data.student.name,
-        assignmentNo: data.course.assignmentNo,
-      });
-      setDownloadSuccess(true);
-      setTimeout(() => setDownloadSuccess(false), 3500);
-    } catch (err) {
-      console.error('Failed to export PDF:', err);
-      alert('Could not generate PDF. Please try again.');
-    } finally {
-      setLocalDownloading(false);
-    }
-  };
 
   // Detect if current department is Accounting
   const isAccountingDept =
@@ -169,45 +123,6 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
                 <ZoomIn className="w-3.5 h-3.5" />
               </button>
             </div>
-
-            {/* Download PDF Button */}
-            <button
-              type="button"
-              id="preview-btn-download-pdf"
-              onClick={handleInternalDownloadPdf}
-              disabled={isDownloading}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed rounded-lg transition-all shadow-xs cursor-pointer"
-              title="Download A4 Cover Page as PDF (Single Page)"
-            >
-              {isDownloading ? (
-                <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Generating PDF...</span>
-                </>
-              ) : downloadSuccess ? (
-                <>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
-                  <span>Downloaded!</span>
-                </>
-              ) : (
-                <>
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download PDF</span>
-                </>
-              )}
-            </button>
-
-            {/* Print Button */}
-            <button
-              type="button"
-              id="preview-btn-print"
-              onClick={onPrint}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg transition-all border border-slate-200 shadow-2xs cursor-pointer"
-              title="Print Cover via Browser Dialog"
-            >
-              <Printer className="w-3.5 h-3.5 text-slate-600" />
-              <span>Print</span>
-            </button>
           </div>
         </div>
 

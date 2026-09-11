@@ -36,8 +36,9 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
           studentId: parsed.student?.studentId ?? '',
           department: parsed.student?.department || parsed.institution?.department || 'Physics',
           roll: parsed.student?.roll ?? '',
-          batch: parsed.student?.batch ?? '',
-          semester: parsed.student?.semester ?? '',
+          year: parsed.student?.year || parsed.student?.semester || '1st Year',
+          semester: parsed.student?.year || parsed.student?.semester || '1st Year',
+          batch: '',
         },
         teacher: {
           name: parsed.teacher?.name ?? '',
@@ -69,8 +70,9 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
           studentId: parsed.student?.classRoll || parsed.student?.examRoll || '',
           department: parsed.institution?.department || 'Physics',
           roll: parsed.student?.classRoll || parsed.student?.examRoll || '',
+          year: parsed.student?.year || parsed.student?.yearSemester || '1st Year',
+          semester: parsed.student?.year || parsed.student?.yearSemester || '1st Year',
           batch: '',
-          semester: parsed.student?.yearSemester ?? '',
         },
         teacher: {
           name: parsed.teacher?.name ?? '',
