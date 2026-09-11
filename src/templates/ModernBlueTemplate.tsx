@@ -35,9 +35,9 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
       </div>
 
       {/* Inner Margin Border and Scaled Frame Padding */}
-      <div className="page-frame relative z-20 w-full h-full px-[18mm] pt-[11mm] pb-[14mm] flex flex-col justify-between box-border">
+      <div className="page-frame relative z-20 w-full h-full px-[18mm] pt-[17mm] pb-[14mm] flex flex-col justify-between box-border">
         {/* TOP SECTION: Centered College Crest + Academic Header */}
-        <div className="flex flex-col items-center pt-0.5 text-center shrink-0">
+        <div className="flex flex-col items-center text-center shrink-0">
           {/* Logo Area */}
           <div className="h-[66px] flex items-center justify-center mb-1.5">
             {!logoError ? (
@@ -89,14 +89,14 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
         </div>
 
         {/* MIDDLE SECTION: Assignment Title, Course Card */}
-        <div className="w-full max-w-[490px] mx-auto box-border flex flex-col gap-2.5">
+        <div className="w-full max-w-[490px] mx-auto box-border flex flex-col">
           {/* ASSIGNMENT HEADER */}
           <div className="assignment-header w-full box-border flex flex-col items-center justify-center m-0 text-center">
             <h3 className="font-academic font-black text-[23px] tracking-[0.25em] text-[#0f172a] uppercase mx-auto">
               A S S I G N M E N T
             </h3>
 
-            <div className="mt-1.5 inline-block border-2 border-[#1e3a8a] rounded-lg px-6 py-0.5 bg-blue-50/60 shadow-2xs mx-auto">
+            <div className="mt-3.5 mb-7 inline-block border-2 border-[#1e3a8a] rounded-lg px-6 py-0.5 bg-blue-50/60 shadow-2xs mx-auto">
               <span className="font-sans text-[13.5px] font-bold text-[#1e3a8a] tracking-wide">
                 {data.course.assignmentNo
                   ? `Assignment No: ${data.course.assignmentNo}`

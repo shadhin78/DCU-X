@@ -25,9 +25,9 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
       </div>
 
       {/* Content Container */}
-      <div className="relative z-20 w-full h-full px-[18mm] pt-[11mm] pb-[14mm] flex flex-col justify-between box-border">
+      <div className="relative z-20 w-full h-full px-[18mm] pt-[18mm] pb-[14mm] flex flex-col justify-between box-border">
         {/* Top Section */}
-        <div className="text-center pt-1 flex flex-col items-center shrink-0">
+        <div className="text-center flex flex-col items-center shrink-0">
           <div className="mb-2 h-[66px] flex items-center justify-center">
             {!logoError ? (
               <img
@@ -92,7 +92,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
             A S S I G N M E N T
           </h2>
 
-          <div className="mt-1.5 mb-2.5 inline-block border-2 border-slate-950 rounded-lg px-5 py-1 bg-white shadow-2xs">
+          <div className="mt-3.5 mb-7 inline-block border-2 border-slate-950 rounded-lg px-5 py-1 bg-white shadow-2xs">
             <span className="font-sans text-[13px] font-bold tracking-wider text-slate-950">
               {data.course.assignmentNo
                 ? `Assignment No: ${data.course.assignmentNo}`
