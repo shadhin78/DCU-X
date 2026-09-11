@@ -132,14 +132,14 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
           {layoutStyle === 'side-by-side' ? (
             <div className="grid grid-cols-2 gap-5 items-stretch">
               {/* Left: Submitted By */}
-              <div className="border border-slate-900/90 rounded-lg p-3 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
+              <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
                 <div>
                   <div className="border-b-2 border-slate-950 pb-1 mb-2">
                     <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
                       Submitted By
                     </h3>
                   </div>
-                  <div className="space-y-1 font-academic text-[12.5px] leading-snug">
+                  <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Name</span>
                       <span className="font-bold text-slate-950">:</span>
@@ -165,14 +165,14 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
               </div>
 
               {/* Right: Submitted To */}
-              <div className="border border-slate-900/90 rounded-lg p-3 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
+              <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white shadow-2xs flex flex-col justify-between h-full min-w-0 w-full box-border">
                 <div>
                   <div className="border-b-2 border-slate-950 pb-1 mb-2">
                     <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
                       Submitted To
                     </h3>
                   </div>
-                  <div className="space-y-1 font-academic text-[12.5px] leading-snug">
+                  <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Name</span>
                       <span className="font-bold text-slate-950">:</span>
