@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif+Bengali:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script>
       (function() {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.search.includes('debug=true')) return;
         // Immediate right-click context menu blocking
         document.addEventListener('contextmenu', function(e) {
           e.preventDefault();

@@ -136,39 +136,39 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           {layoutStyle === 'side-by-side' ? (
             <div className="grid grid-cols-2 gap-5 items-stretch">
               {/* Left Column: SUBMITTED BY */}
-              <div className="submitted-by min-w-0 w-full h-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs flex flex-col justify-between">
+              <div className="submitted-by min-w-0 w-full h-full box-border border border-blue-200/90 rounded-xl p-4.5 bg-white shadow-2xs flex flex-col justify-between">
                 <div>
-                  <div className="border-b border-blue-200 pb-1 mb-2">
-                    <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
+                  <div className="border-b-2 border-blue-200 pb-1.5 mb-2.5">
+                    <h4 className="font-sans font-bold text-[15px] text-[#1e3a8a] uppercase tracking-wider">
                       SUBMITTED BY
                     </h4>
                   </div>
-                  <div className="space-y-1.5 font-sans text-[13px] leading-snug">
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                  <div className="space-y-2 font-sans text-[14.5px] leading-snug">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Name</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-bold text-[#0f172a] text-[13.5px] leading-tight break-words min-w-0">
+                      <span className="font-bold text-[#0f172a] text-[15.5px] leading-tight break-words min-w-0">
                         {data.student.name || ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Roll</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-mono font-bold text-[#0f172a] text-[13.5px] break-words min-w-0">
+                      <span className="font-mono font-bold text-[#0f172a] text-[15px] break-words min-w-0">
                         {data.student.roll || ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Department</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[13px] break-words min-w-0">
+                      <span className="text-[#0f172a] font-medium text-[14.5px] break-words min-w-0">
                         {data.student.department || data.institution.department || ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Year</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[13px] break-words min-w-0">
+                      <span className="text-[#0f172a] font-medium text-[14.5px] break-words min-w-0">
                         {data.student.year || data.student.semester || ''}
                       </span>
                     </div>
@@ -177,41 +177,41 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
               </div>
 
               {/* Right Column: SUBMITTED TO */}
-              <div className="submitted-to min-w-0 w-full h-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs flex flex-col justify-between">
+              <div className="submitted-to min-w-0 w-full h-full box-border border border-blue-200/90 rounded-xl p-4.5 bg-white shadow-2xs flex flex-col justify-between">
                 <div>
-                  <div className="border-b border-blue-200 pb-1 mb-2">
-                    <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
+                  <div className="border-b-2 border-blue-200 pb-1.5 mb-2.5">
+                    <h4 className="font-sans font-bold text-[15px] text-[#1e3a8a] uppercase tracking-wider">
                       SUBMITTED TO
                     </h4>
                   </div>
-                  <div className="space-y-1.5 font-sans text-[13px] leading-snug">
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                  <div className="space-y-2 font-sans text-[14.5px] leading-snug">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Name</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="font-bold text-[#0f172a] text-[13.5px] leading-tight break-words min-w-0">
+                      <span className="font-bold text-[#0f172a] text-[15.5px] leading-tight break-words min-w-0">
                         {data.teacher.name || ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Designation</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[13px] break-words min-w-0">
+                      <span className="text-[#0f172a] font-medium text-[14.5px] break-words min-w-0">
                         {data.teacher.designation || ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">Department</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#0f172a] font-medium text-[13px] leading-snug break-words min-w-0">
+                      <span className="text-[#0f172a] font-medium text-[14.5px] leading-snug break-words min-w-0">
                         {data.teacher.department
                           ? `Department of ${data.teacher.department}`
                           : ''}
                       </span>
                     </div>
-                    <div className="grid grid-cols-[90px_12px_1fr] items-baseline">
+                    <div className="grid grid-cols-[108px_14px_1fr] items-baseline">
                       <span className="text-[#475569] font-bold">College</span>
                       <span className="text-[#64748b] font-bold">:</span>
-                      <span className="text-[#475569] text-[11.5px] break-words min-w-0">
+                      <span className="text-[#475569] text-[13px] break-words min-w-0">
                         {data.institution.collegeName || ''}
                       </span>
                     </div>
@@ -222,68 +222,68 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           ) : (
             /* Stacked Mode */
             <div className="space-y-2.5 max-w-[480px] mx-auto w-full">
-              <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-2.5 bg-white shadow-2xs">
-                <div className="border-b border-blue-200 pb-1 mb-1.5">
-                  <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
+              <div className="submitted-by min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs">
+                <div className="border-b-2 border-blue-200 pb-1 mb-2">
+                  <h4 className="font-sans font-bold text-[14px] text-[#1e3a8a] uppercase tracking-wider">
                     SUBMITTED BY
                   </h4>
                 </div>
-                <div className="grid grid-cols-2 gap-x-6 gap-y-1 font-sans text-[13px]">
-                  <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 font-sans text-[13.5px]">
+                  <div className="grid grid-cols-[54px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Name</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="font-bold text-[#0f172a] text-[14px]">{data.student.name || ''}</span>
+                    <span className="font-bold text-[#0f172a] text-[14.5px]">{data.student.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[54px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Roll</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="font-mono font-bold text-[#0f172a] text-[13.5px]">{data.student.roll || ''}</span>
+                    <span className="font-mono font-bold text-[#0f172a] text-[14px]">{data.student.roll || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[54px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Dept</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="text-[#0f172a] font-medium text-[13px]">
+                    <span className="text-[#0f172a] font-medium text-[13.5px]">
                       {data.student.department || data.institution.department || ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[48px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[54px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Year</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="text-[#0f172a] font-medium text-[13px]">
+                    <span className="text-[#0f172a] font-medium text-[13.5px]">
                       {data.student.year || data.student.semester || ''}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-2.5 bg-white shadow-2xs">
-                <div className="border-b border-blue-200 pb-1 mb-1.5">
-                  <h4 className="font-sans font-bold text-[12.5px] text-[#1e3a8a] uppercase tracking-wider">
+              <div className="submitted-to min-w-0 w-full box-border border border-blue-200/90 rounded-xl p-3.5 bg-white shadow-2xs">
+                <div className="border-b-2 border-blue-200 pb-1 mb-2">
+                  <h4 className="font-sans font-bold text-[14px] text-[#1e3a8a] uppercase tracking-wider">
                     SUBMITTED TO
                   </h4>
                 </div>
-                <div className="space-y-1 font-sans text-[13px]">
-                  <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
+                <div className="space-y-1.5 font-sans text-[13.5px]">
+                  <div className="grid grid-cols-[92px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Name</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="font-bold text-[#0f172a] text-[14px]">{data.teacher.name || ''}</span>
+                    <span className="font-bold text-[#0f172a] text-[14.5px]">{data.teacher.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Designation</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="text-[#0f172a] font-medium text-[13px]">{data.teacher.designation || ''}</span>
+                    <span className="text-[#0f172a] font-medium text-[13.5px]">{data.teacher.designation || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">Department</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="text-[#0f172a] font-medium text-[13px]">
+                    <span className="text-[#0f172a] font-medium text-[13.5px]">
                       {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[76px_8px_1fr] items-baseline">
+                  <div className="grid grid-cols-[92px_10px_1fr] items-baseline">
                     <span className="text-[#475569] font-bold">College</span>
                     <span className="text-[#64748b] font-bold">:</span>
-                    <span className="text-[#475569] text-[11.5px]">
+                    <span className="text-[#475569] text-[13px]">
                       {data.institution.collegeName || ''}
                     </span>
                   </div>

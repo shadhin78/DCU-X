@@ -42,6 +42,9 @@ function showSecurityToast(message: string): void {
  * Check if debug bypass mode is enabled (for developer debugging if explicitly desired).
  */
 export function isDebugBypassActive(): boolean {
+  if (import.meta.env.DEV) {
+    return true;
+  }
   try {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('debug') === 'true') {
