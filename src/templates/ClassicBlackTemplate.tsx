@@ -146,7 +146,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Roll</span>
                       <span className="font-bold text-slate-950">:</span>
-                      <span className="font-mono text-slate-900 break-words min-w-0">{data.student.roll || ''}</span>
+                      <span className="font-mono font-bold text-slate-950 break-words min-w-0">{data.student.roll || ''}</span>
                     </div>
                     <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
                       <span className="font-bold text-slate-950">Department</span>
@@ -217,7 +217,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
                   </div>
                   <div className="flex gap-1.5">
                     <span className="font-bold text-slate-950">Roll:</span>
-                    <span className="font-mono text-slate-900">{data.student.roll || ''}</span>
+                    <span className="font-mono font-bold text-slate-950">{data.student.roll || ''}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <span className="font-bold text-slate-950">Dept:</span>
