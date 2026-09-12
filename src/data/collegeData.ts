@@ -82,40 +82,9 @@ export function getDepartmentsForFaculty(facultyName?: string): string[] {
 
 export const INITIAL_SAMPLE_DATA: CoverPageData = {
   institution: {
-    collegeName: 'Government Titumir College',
-    faculty: 'Faculty of Science',
-    department: 'Physics',
-  },
-  course: {
-    courseCode: 'PHY-201',
-    courseTitle: 'Classical Mechanics & Thermal Physics',
-    assignmentNo: '01',
-    assignmentTitle: 'Mathematical Analysis of Damped and Forced Harmonic Oscillations',
-  },
-  student: {
-    name: 'Md. Tanvir Hossain',
-    studentId: '2022-PHY-045',
-    department: 'Physics',
-    roll: '723849',
-    year: '2nd Year',
-    semester: '2nd Year',
-    batch: '',
-  },
-  teacher: {
-    name: 'Prof. Dr. Mohammad Rafiqul Islam',
-    designation: 'Associate Professor',
-    department: 'Physics',
-  },
-  dates: {
-    submissionDate: new Date().toISOString().split('T')[0],
-  },
-};
-
-export const BLANK_COVER_DATA: CoverPageData = {
-  institution: {
-    collegeName: 'Government Titumir College',
-    faculty: 'Faculty of Science',
-    department: 'Physics',
+    collegeName: '',
+    faculty: '',
+    department: '',
   },
   course: {
     courseCode: '',
@@ -126,16 +95,47 @@ export const BLANK_COVER_DATA: CoverPageData = {
   student: {
     name: '',
     studentId: '',
-    department: 'Physics',
+    department: '',
     roll: '',
-    year: '1st Year',
-    semester: '1st Year',
+    year: '',
+    semester: '',
     batch: '',
   },
   teacher: {
     name: '',
     designation: '',
-    department: 'Physics',
+    department: '',
+  },
+  dates: {
+    submissionDate: '',
+  },
+};
+
+export const BLANK_COVER_DATA: CoverPageData = {
+  institution: {
+    collegeName: '',
+    faculty: '',
+    department: '',
+  },
+  course: {
+    courseCode: '',
+    courseTitle: '',
+    assignmentNo: '',
+    assignmentTitle: '',
+  },
+  student: {
+    name: '',
+    studentId: '',
+    department: '',
+    roll: '',
+    year: '',
+    semester: '',
+    batch: '',
+  },
+  teacher: {
+    name: '',
+    designation: '',
+    department: '',
   },
   dates: {
     submissionDate: '',
