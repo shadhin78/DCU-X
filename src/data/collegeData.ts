@@ -89,6 +89,16 @@ export const SEVEN_COLLEGES: AffiliatedCollege[] = [
     ],
     logo: '/colleges/titumir-college.png',
   },
+  {
+    id: 'dcu',
+    name: 'Dhaka Central University',
+    shortName: 'DCU',
+    aliases: [
+      'Dhaka Central University',
+      'DCU',
+    ],
+    logo: '/dcu-logo.png',
+  },
 ];
 
 export function findCollege(collegeName?: string): AffiliatedCollege | null {
