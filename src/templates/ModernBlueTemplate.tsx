@@ -65,9 +65,11 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           <h1 className="font-academic font-black text-[21px] tracking-[0.04em] text-[#1e3a8a] uppercase leading-tight">
             {data.institution.collegeName || 'GOVERNMENT TITUMIR COLLEGE'}
           </h1>
-          <p className="font-sans text-[11px] tracking-[0.22em] font-bold text-[#2563eb] uppercase mt-0.5">
-            Dhaka Central University
-          </p>
+          {data.institution.collegeName !== 'Dhaka Central University' && (
+            <p className="font-sans text-[11px] tracking-[0.22em] font-bold text-[#2563eb] uppercase mt-0.5">
+              Dhaka Central University
+            </p>
+          )}
 
           {/* Faculty and Department */}
           <div className="mt-1.5 space-y-0.5">

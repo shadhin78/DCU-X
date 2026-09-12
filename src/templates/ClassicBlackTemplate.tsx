@@ -55,9 +55,11 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
           <h1 className="font-cinzel font-black text-[21px] tracking-[0.06em] text-slate-950 uppercase leading-tight">
             {data.institution.collegeName || 'Government Titumir College'}
           </h1>
-          <p className="font-sans text-[10px] tracking-[0.2em] font-semibold text-slate-700 uppercase mt-0.5">
-            Dhaka Central University
-          </p>
+          {data.institution.collegeName !== 'Dhaka Central University' && (
+            <p className="font-sans text-[10px] tracking-[0.2em] font-semibold text-slate-700 uppercase mt-0.5">
+              Dhaka Central University
+            </p>
+          )}
 
           <div className="mt-2 space-y-0.5">
             {data.institution.faculty && (
