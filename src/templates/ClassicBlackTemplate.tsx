@@ -29,28 +29,30 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
       <div className="relative z-20 w-full h-full px-[18mm] pt-[18mm] pb-[14mm] flex flex-col justify-between box-border">
         {/* Top Section */}
         <div className="text-center flex flex-col items-center shrink-0">
-          <div className="mb-2 h-[66px] flex items-center justify-center">
-            {!logoError ? (
-              <img
-                src={getCollegeLogo(data.institution.collegeName)}
-                alt={`${data.institution.collegeName || 'College'} Logo`}
-                crossOrigin="anonymous"
-                onError={onLogoError}
-                className="h-[64px] w-auto max-w-[95px] object-contain drop-shadow-2xs"
-              />
-            ) : (
-              <div className="w-[62px] h-[62px] rounded-full border-2 border-slate-900 flex flex-col items-center justify-center bg-emerald-50 text-slate-900 shadow-2xs">
-                <div className="w-[54px] h-[54px] rounded-full border border-dashed border-slate-700 flex flex-col items-center justify-center p-1 text-center">
-                  <span className="font-cinzel text-[10.5px] font-bold leading-tight">
-                    {getCollegeShortName(data.institution.collegeName)}
-                  </span>
-                  <span className="text-[7px] font-sans font-semibold tracking-wider text-slate-700 uppercase">
-                    {getCollegeEstd(data.institution.collegeName) ? `Estd ${getCollegeEstd(data.institution.collegeName)}` : 'COLLEGE'}
-                  </span>
+          {getCollegeLogo(data.institution.collegeName) && (
+            <div className="mb-2 h-[66px] flex items-center justify-center">
+              {!logoError ? (
+                <img
+                  src={getCollegeLogo(data.institution.collegeName)}
+                  alt={`${data.institution.collegeName || 'College'} Logo`}
+                  crossOrigin="anonymous"
+                  onError={onLogoError}
+                  className="h-[64px] w-auto max-w-[95px] object-contain drop-shadow-2xs"
+                />
+              ) : (
+                <div className="w-[62px] h-[62px] rounded-full border-2 border-slate-900 flex flex-col items-center justify-center bg-emerald-50 text-slate-900 shadow-2xs">
+                  <div className="w-[54px] h-[54px] rounded-full border border-dashed border-slate-700 flex flex-col items-center justify-center p-1 text-center">
+                    <span className="font-cinzel text-[10.5px] font-bold leading-tight">
+                      {getCollegeShortName(data.institution.collegeName)}
+                    </span>
+                    <span className="text-[7px] font-sans font-semibold tracking-wider text-slate-700 uppercase">
+                      {getCollegeEstd(data.institution.collegeName) ? `Estd ${getCollegeEstd(data.institution.collegeName)}` : 'COLLEGE'}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           <h1 className="font-cinzel font-black text-[21px] tracking-[0.06em] text-slate-950 uppercase leading-tight">
             {data.institution.collegeName || 'Government Titumir College'}
@@ -62,7 +64,7 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
           )}
 
           <div className="mt-2 space-y-0.5">
-            {data.institution.faculty && (
+            {data.institution.faculty && data.institution.faculty !== 'Other Departments / Subjects' && (
               <p className="font-sans text-[11.5px] font-semibold text-slate-800 uppercase tracking-widest">
                 {data.institution.faculty}
               </p>

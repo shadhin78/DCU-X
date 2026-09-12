@@ -40,26 +40,28 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
         {/* TOP SECTION: Centered College Crest + Academic Header */}
         <div className="flex flex-col items-center text-center shrink-0">
           {/* Logo Area */}
-          <div className="h-[66px] flex items-center justify-center mb-1.5">
-            {!logoError ? (
-              <img
-                src={getCollegeLogo(data.institution.collegeName)}
-                alt={`${data.institution.collegeName || 'College'} Logo`}
-                crossOrigin="anonymous"
-                onError={onLogoError}
-                className="h-[64px] w-auto max-w-[90px] object-contain drop-shadow-2xs"
-              />
-            ) : (
-              <div className="w-[62px] h-[62px] rounded-full border-2 border-[#1e3a8a] flex flex-col items-center justify-center bg-blue-50 text-[#1e3a8a] shadow-2xs">
-                <span className="font-cinzel text-[11px] font-bold">
-                  {getCollegeShortName(data.institution.collegeName)}
-                </span>
-                <span className="text-[7.5px] uppercase tracking-wider font-semibold">
-                  {getCollegeEstd(data.institution.collegeName) || '1968'}
-                </span>
-              </div>
-            )}
-          </div>
+          {getCollegeLogo(data.institution.collegeName) && (
+            <div className="h-[66px] flex items-center justify-center mb-1.5">
+              {!logoError ? (
+                <img
+                  src={getCollegeLogo(data.institution.collegeName)}
+                  alt={`${data.institution.collegeName || 'College'} Logo`}
+                  crossOrigin="anonymous"
+                  onError={onLogoError}
+                  className="h-[64px] w-auto max-w-[90px] object-contain drop-shadow-2xs"
+                />
+              ) : (
+                <div className="w-[62px] h-[62px] rounded-full border-2 border-[#1e3a8a] flex flex-col items-center justify-center bg-blue-50 text-[#1e3a8a] shadow-2xs">
+                  <span className="font-cinzel text-[11px] font-bold">
+                    {getCollegeShortName(data.institution.collegeName)}
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-wider font-semibold">
+                    {getCollegeEstd(data.institution.collegeName) || '1968'}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* College Title */}
           <h1 className="font-academic font-black text-[21px] tracking-[0.04em] text-[#1e3a8a] uppercase leading-tight">
@@ -73,7 +75,7 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
 
           {/* Faculty and Department */}
           <div className="mt-1.5 space-y-0.5">
-            {data.institution.faculty && (
+            {data.institution.faculty && data.institution.faculty !== 'Other Departments / Subjects' && (
               <p className="font-sans text-[11.5px] font-semibold text-[#475569] uppercase tracking-widest">
                 {data.institution.faculty}
               </p>

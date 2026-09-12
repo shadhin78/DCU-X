@@ -115,7 +115,7 @@ export function findCollege(collegeName?: string): AffiliatedCollege | null {
 
 export function getCollegeLogo(collegeName?: string): string {
   const college = findCollege(collegeName);
-  return college ? college.logo : '/logo.png';
+  return college ? college.logo : '';
 }
 
 export function getCollegeShortName(collegeName?: string): string {
