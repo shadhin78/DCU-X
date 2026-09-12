@@ -65,6 +65,11 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
   });
   const [logoError, setLogoError] = useState<boolean>(false);
 
+  // Reset logo error when college name changes
+  useEffect(() => {
+    setLogoError(false);
+  }, [data.institution.collegeName]);
+
   // Auto-fit zoom on mount and window resize for phone and tablet
   useEffect(() => {
     const handleResize = () => {

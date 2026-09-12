@@ -1,5 +1,6 @@
 import React from 'react';
 import { TemplateProps, formatDdMmYyyy } from './types';
+import { getCollegeLogo, getCollegeShortName, getCollegeEstd } from '../data/collegeData';
 
 export const ModernBlueTemplate: React.FC<TemplateProps> = ({
   data,
@@ -42,16 +43,20 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           <div className="h-[66px] flex items-center justify-center mb-1.5">
             {!logoError ? (
               <img
-                src="/logo.png"
-                alt="Government Titumir College Logo"
+                src={getCollegeLogo(data.institution.collegeName)}
+                alt={`${data.institution.collegeName || 'College'} Logo`}
                 crossOrigin="anonymous"
                 onError={onLogoError}
                 className="h-[64px] w-auto max-w-[90px] object-contain drop-shadow-2xs"
               />
             ) : (
               <div className="w-[62px] h-[62px] rounded-full border-2 border-[#1e3a8a] flex flex-col items-center justify-center bg-blue-50 text-[#1e3a8a] shadow-2xs">
-                <span className="font-cinzel text-[11px] font-bold">GTC</span>
-                <span className="text-[7.5px] uppercase tracking-wider font-semibold">1968</span>
+                <span className="font-cinzel text-[11px] font-bold">
+                  {getCollegeShortName(data.institution.collegeName)}
+                </span>
+                <span className="text-[7.5px] uppercase tracking-wider font-semibold">
+                  {getCollegeEstd(data.institution.collegeName) || '1968'}
+                </span>
               </div>
             )}
           </div>

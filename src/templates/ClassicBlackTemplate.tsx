@@ -1,5 +1,6 @@
 import React from 'react';
 import { TemplateProps, formatLongDate } from './types';
+import { getCollegeLogo, getCollegeShortName, getCollegeEstd } from '../data/collegeData';
 
 export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
   data,
@@ -31,8 +32,8 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
           <div className="mb-2 h-[66px] flex items-center justify-center">
             {!logoError ? (
               <img
-                src="/logo.png"
-                alt="Government Titumir College Logo"
+                src={getCollegeLogo(data.institution.collegeName)}
+                alt={`${data.institution.collegeName || 'College'} Logo`}
                 crossOrigin="anonymous"
                 onError={onLogoError}
                 className="h-[64px] w-auto max-w-[95px] object-contain drop-shadow-2xs"
@@ -40,9 +41,11 @@ export const ClassicBlackTemplate: React.FC<TemplateProps> = ({
             ) : (
               <div className="w-[62px] h-[62px] rounded-full border-2 border-slate-900 flex flex-col items-center justify-center bg-emerald-50 text-slate-900 shadow-2xs">
                 <div className="w-[54px] h-[54px] rounded-full border border-dashed border-slate-700 flex flex-col items-center justify-center p-1 text-center">
-                  <span className="font-cinzel text-[10.5px] font-bold leading-tight">GTC</span>
+                  <span className="font-cinzel text-[10.5px] font-bold leading-tight">
+                    {getCollegeShortName(data.institution.collegeName)}
+                  </span>
                   <span className="text-[7px] font-sans font-semibold tracking-wider text-slate-700 uppercase">
-                    Estd 1968
+                    {getCollegeEstd(data.institution.collegeName) ? `Estd ${getCollegeEstd(data.institution.collegeName)}` : 'COLLEGE'}
                   </span>
                 </div>
               </div>

@@ -225,7 +225,11 @@ function patchWindowGetComputedStyle(targetWindow: Window): () => void {
  * Removes filesystem-prohibited characters across Windows, macOS, Linux, and mobile filesystems
  * while safely preserving Unicode (including Bengali script).
  */
-export function getPdfFileName(studentName?: string, assignmentNo?: string): string {
+export function getPdfFileName(
+  studentName?: string,
+  assignmentNo?: string,
+  collegeName?: string
+): string {
   // Remove filesystem-unsafe characters: / \ ? % * : | " < > # and control codes
   const cleanStudent = (studentName || '')
     .trim()
@@ -243,8 +247,15 @@ export function getPdfFileName(studentName?: string, assignmentNo?: string): str
 
   const finalStudent = cleanStudent || 'Student';
   const finalAssignment = cleanAssignment || '1';
+  const cleanCollege = (collegeName || 'DCU')
+    .replace(/[^a-zA-Z0-9\s]/g, '')
+    .trim()
+    .replace(/\s+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  const finalCollege = cleanCollege || 'DCU';
 
-  return `Titumir_Assignment_Cover_${finalStudent}_${finalAssignment}.pdf`;
+  return `${finalCollege}_Assignment_Cover_${finalStudent}_${finalAssignment}.pdf`;
 }
 
 /**
@@ -260,12 +271,14 @@ export async function downloadCoverPagePdf(options: {
   wrapperId?: string;
   studentName?: string;
   assignmentNo?: string;
+  collegeName?: string;
 }): Promise<void> {
   const {
     elementId = 'a4-cover-sheet',
     wrapperId = 'a4-cover-sheet-wrapper',
     studentName,
     assignmentNo,
+    collegeName,
   } = options;
 
   const element = document.getElementById(elementId);
@@ -498,7 +511,7 @@ export async function downloadCoverPagePdf(options: {
     }
 
     // 6. Filename formatting with safe fallbacks and Unicode support
-    const fileName = getPdfFileName(studentName, assignmentNo);
+    const fileName = getPdfFileName(studentName, assignmentNo, collegeName);
 
     // 7. Download directly in browser via local Blob object URL
     const blob = pdf.output('blob');

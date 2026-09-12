@@ -135,6 +135,7 @@ export default function App() {
       await downloadCoverPagePdf({
         studentName: data.student.name,
         assignmentNo: data.course.assignmentNo,
+        collegeName: data.institution.collegeName,
       });
       const name = data.student.name?.trim() || 'Student';
       setDownloadNotice(`Cover page for ${name} exported to A4 PDF successfully!`);

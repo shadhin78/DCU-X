@@ -3,7 +3,7 @@
  * Production-ready caching, offline app shell, and lifecycle management.
  */
 
-const CACHE_VERSION = 'dcux-v1.0.0';
+const CACHE_VERSION = 'dcux-v1.0.2';
 const CORE_CACHE = `dcux-core-${CACHE_VERSION}`;
 const ASSETS_CACHE = `dcux-assets-${CACHE_VERSION}`;
 const IMAGES_CACHE = `dcux-images-${CACHE_VERSION}`;
@@ -26,6 +26,14 @@ const PRECACHE_ASSETS = [
   '/icons/favicon-16x16.png',
   '/dculogo.jpg',
   '/logo.png',
+  '/logo.svg',
+  '/colleges/dhaka-college.png',
+  '/colleges/eden-mohila.png',
+  '/colleges/badrunnessa.png',
+  '/colleges/kabi-nazrul.png',
+  '/colleges/suhrawardy.png',
+  '/colleges/bangla-college.png',
+  '/colleges/titumir-college.png',
 ];
 
 // Helper to keep dynamic caches bounded
