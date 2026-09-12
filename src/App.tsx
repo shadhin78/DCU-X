@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { FormPanel } from './components/FormPanel';
 import { A4PreviewPanel } from './components/A4PreviewPanel';
 import { useAssignmentCover } from './hooks/useAssignmentCover';
 import { downloadCoverPagePdf } from './utils/pdfExport';
-import { CheckCircle2, ArrowUp } from 'lucide-react';
+import { CheckCircle2, ArrowUp, RefreshCw, WifiOff } from 'lucide-react';
+import type { PwaUpdateEventDetail } from './registerServiceWorker';
 
 export default function App() {
   const {
@@ -23,6 +24,29 @@ export default function App() {
 
   const [isGeneratingPdf, setIsGeneratingPdf] = useState<boolean>(false);
   const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
+  const [updateApplyFn, setUpdateApplyFn] = useState<(() => void) | null>(null);
+  const [isOffline, setIsOffline] = useState<boolean>(() => (typeof navigator !== 'undefined' ? !navigator.onLine : false));
+
+  useEffect(() => {
+    const handleUpdate = (e: CustomEvent<PwaUpdateEventDetail>) => {
+      if (e.detail && typeof e.detail.applyUpdate === 'function') {
+        setUpdateApplyFn(() => e.detail.applyUpdate);
+      }
+    };
+
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener('pwa-update-available', handleUpdate as EventListener);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('pwa-update-available', handleUpdate as EventListener);
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const handlePrint = () => {
     window.print();
@@ -94,6 +118,45 @@ export default function App() {
           <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
           <span>{downloadNotice}</span>
         </div>
+      )}
+
+      {/* PWA Update Notification Banner */}
+      {updateApplyFn && (
+        <div
+          id="pwa-update-banner"
+          className="fixed bottom-16 sm:bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-medium border border-slate-700 animate-in fade-in slide-in-from-bottom-2"
+        >
+          <RefreshCw className="w-4 h-4 text-emerald-400 shrink-0 animate-spin-reverse" />
+          <span>A new version of DCU-X is available.</span>
+          <div className="flex items-center gap-2 ml-1">
+            <button
+              type="button"
+              onClick={() => updateApplyFn()}
+              className="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors cursor-pointer shadow-xs"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              onClick={() => setUpdateApplyFn(null)}
+              className="text-slate-400 hover:text-slate-200 text-[11px] px-1.5 py-0.5 rounded transition-colors cursor-pointer"
+            >
+              Later
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Offline Status Badge */}
+      {isOffline && (
+        <aside
+          aria-label="Offline Mode Notification"
+          id="pwa-offline-badge"
+          className="fixed bottom-16 sm:bottom-5 left-5 z-40 bg-amber-950/90 text-amber-100 backdrop-blur px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-[11px] font-medium border border-amber-800/80 animate-in fade-in"
+        >
+          <WifiOff className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span>Offline mode (saved locally)</span>
+        </aside>
       )}
 
       {/* Floating "Back to Top / Form" button on mobile */}
