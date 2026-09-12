@@ -245,7 +245,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 )}
                 {SEVEN_COLLEGES.map((col, idx) => (
                   <option key={col.id} value={col.name}>
-                    {idx + 1}. {col.name} {col.estd ? `(Estd. ${col.estd})` : ''}
+                    {idx + 1}. {col.name}
                   </option>
                 ))}
                 <option value="__custom__">Other / Custom College...</option>
