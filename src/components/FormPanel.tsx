@@ -63,6 +63,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
     dates: true,
   });
 
+  const [isCustomDeptSelected, setIsCustomDeptSelected] = useState(false);
+
   const toggleSection = (section: keyof typeof openSections) => {
     setOpenSections((prev) => ({
       ...prev,
@@ -72,24 +74,38 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
   const currentFacultyName = normalizeFaculty(data.institution.faculty);
   const selectedFacultyObj =
-    TITUMIR_FACULTIES.find((f) => f.name === currentFacultyName) || TITUMIR_FACULTIES[1];
+    TITUMIR_FACULTIES.find((f) => f.name === currentFacultyName) || null;
 
-  const isPredefinedDept = selectedFacultyObj.departments.some(
-    (dept) => dept.toLowerCase() === (data.institution.department || '').toLowerCase()
-  );
+  const isPredefinedDept = selectedFacultyObj
+    ? selectedFacultyObj.departments.some(
+        (dept) => dept.toLowerCase() === (data.institution.department || '').toLowerCase()
+      )
+    : false;
+
+  const isCustomMode =
+    isCustomDeptSelected || (!isPredefinedDept && Boolean(data.institution.department));
 
   const handleFacultyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const facultyName = e.target.value;
     const foundFaculty =
-      TITUMIR_FACULTIES.find((f) => f.name === facultyName) || TITUMIR_FACULTIES[0];
+      TITUMIR_FACULTIES.find((f) => f.name === facultyName) || null;
+
+    if (!foundFaculty) {
+      onUpdateInstitution({
+        faculty: '',
+        department: isCustomMode ? data.institution.department : '',
+      });
+      return;
+    }
 
     const isCurrentDeptInNewFaculty = foundFaculty.departments.some(
       (dept) => dept.toLowerCase() === (data.institution.department || '').toLowerCase()
     );
 
-    const newDepartment = isCurrentDeptInNewFaculty
-      ? data.institution.department
-      : foundFaculty.departments[0] || '';
+    const newDepartment =
+      isCurrentDeptInNewFaculty || isCustomMode
+        ? data.institution.department
+        : '';
 
     onUpdateInstitution({
       faculty: foundFaculty.name,
@@ -99,7 +115,13 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
   const handleDepartmentSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
-    if (val && val !== '__custom__') {
+    if (val === '__custom__') {
+      setIsCustomDeptSelected(true);
+      if (isPredefinedDept) {
+        onUpdateInstitution({ department: '' });
+      }
+    } else {
+      setIsCustomDeptSelected(false);
       onUpdateInstitution({ department: val });
     }
   };
@@ -192,10 +214,13 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 </label>
                 <select
                   id="select-faculty"
-                  value={selectedFacultyObj.name}
+                  value={selectedFacultyObj ? selectedFacultyObj.name : ''}
                   onChange={handleFacultyChange}
                   className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white font-medium text-slate-800 transition-shadow"
                 >
+                  {!selectedFacultyObj && (
+                    <option value="" disabled>Select Faculty...</option>
+                  )}
                   {TITUMIR_FACULTIES.map((fac) => (
                     <option key={fac.id} value={fac.name}>
                       {fac.name}
@@ -209,47 +234,46 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   htmlFor="select-department"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  Department Preset{' '}
+                  Department{' '}
                   <span className="text-rose-500 font-bold" title="Required field">
                     *
                   </span>
                 </label>
                 <select
                   id="select-department"
-                  value={isPredefinedDept ? data.institution.department : '__custom__'}
+                  value={
+                    isCustomMode
+                      ? '__custom__'
+                      : (isPredefinedDept ? data.institution.department : '')
+                  }
                   onChange={handleDepartmentSelect}
                   className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white text-slate-800 transition-shadow"
                 >
-                  {selectedFacultyObj.departments.map((dept) => (
+                  {!data.institution.department && !isCustomMode && (
+                    <option value="" disabled>Select Department...</option>
+                  )}
+                  {selectedFacultyObj && selectedFacultyObj.departments.map((dept) => (
                     <option key={dept} value={dept}>
                       {dept}
                     </option>
                   ))}
-                  {!isPredefinedDept && data.institution.department && (
-                    <option value="__custom__">Custom: {data.institution.department}</option>
-                  )}
+                  <option value="__custom__">Custom / Other</option>
                 </select>
-              </div>
-            </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label
-                  htmlFor="input-institution-dept"
-                  className="block text-xs font-semibold text-slate-700"
-                >
-                  Department Name (Editable)
-                </label>
-                <span className="text-[11px] text-slate-400">Printed on cover</span>
+                {isCustomMode && (
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="input-custom-department"
+                      value={data.institution.department}
+                      onChange={(e) => onUpdateInstitution({ department: e.target.value })}
+                      placeholder="Enter custom department name"
+                      className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white text-slate-900 transition-shadow"
+                      autoFocus
+                    />
+                  </div>
+                )}
               </div>
-              <input
-                type="text"
-                id="input-institution-dept"
-                value={data.institution.department}
-                onChange={(e) => onUpdateInstitution({ department: e.target.value })}
-                placeholder="e.g. Accounting / Physics / English"
-                className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-slate-50/60 text-slate-900 transition-shadow"
-              />
             </div>
           </div>
         )}
@@ -508,7 +532,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 </label>
                 <select
                   id="select-student-year"
-                  value={data.student.year || data.student.semester || '1st Year'}
+                  value={data.student.year || data.student.semester || ''}
                   onChange={(e) =>
                     onUpdateStudent({
                       year: e.target.value,
@@ -517,6 +541,9 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   }
                   className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white text-slate-900 transition-shadow cursor-pointer"
                 >
+                  {!data.student.year && !data.student.semester && (
+                    <option value="" disabled>Select Year...</option>
+                  )}
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
                   <option value="3rd Year">3rd Year</option>

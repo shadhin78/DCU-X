@@ -21,9 +21,9 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
     if (parsed.course || parsed.dates) {
       return {
         institution: {
-          collegeName: parsed.institution?.collegeName || INITIAL_SAMPLE_DATA.institution.collegeName,
+          collegeName: parsed.institution?.collegeName || 'Government Titumir College',
           faculty: normalizeFaculty(parsed.institution?.faculty),
-          department: parsed.institution?.department || INITIAL_SAMPLE_DATA.institution.department,
+          department: parsed.institution?.department ?? '',
         },
         course: {
           courseCode: parsed.course?.courseCode ?? '',
@@ -34,16 +34,16 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
         student: {
           name: parsed.student?.name ?? '',
           studentId: parsed.student?.studentId ?? '',
-          department: parsed.student?.department || parsed.institution?.department || 'Physics',
+          department: parsed.student?.department || parsed.institution?.department || '',
           roll: parsed.student?.roll || parsed.student?.studentId || '',
-          year: parsed.student?.year || parsed.student?.semester || '1st Year',
-          semester: parsed.student?.year || parsed.student?.semester || '1st Year',
+          year: parsed.student?.year || parsed.student?.semester || '',
+          semester: parsed.student?.year || parsed.student?.semester || '',
           batch: '',
         },
         teacher: {
           name: parsed.teacher?.name ?? '',
           designation: parsed.teacher?.designation ?? '',
-          department: parsed.teacher?.department || parsed.institution?.department || 'Physics',
+          department: parsed.teacher?.department || parsed.institution?.department || '',
         },
         dates: {
           submissionDate: parsed.dates?.submissionDate ?? '',
@@ -55,9 +55,9 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
     if (parsed.assignment) {
       return {
         institution: {
-          collegeName: parsed.institution?.collegeName || INITIAL_SAMPLE_DATA.institution.collegeName,
+          collegeName: parsed.institution?.collegeName || 'Government Titumir College',
           faculty: normalizeFaculty(parsed.institution?.faculty),
-          department: parsed.institution?.department || 'Physics',
+          department: parsed.institution?.department || '',
         },
         course: {
           courseCode: parsed.assignment?.courseCode ?? '',
@@ -68,16 +68,16 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
         student: {
           name: parsed.student?.name ?? '',
           studentId: parsed.student?.classRoll || parsed.student?.examRoll || '',
-          department: parsed.institution?.department || 'Physics',
+          department: parsed.institution?.department || '',
           roll: parsed.student?.classRoll || parsed.student?.examRoll || '',
-          year: parsed.student?.year || parsed.student?.yearSemester || '1st Year',
-          semester: parsed.student?.year || parsed.student?.yearSemester || '1st Year',
+          year: parsed.student?.year || parsed.student?.yearSemester || '',
+          semester: parsed.student?.year || parsed.student?.yearSemester || '',
           batch: '',
         },
         teacher: {
           name: parsed.teacher?.name ?? '',
           designation: parsed.teacher?.designation ?? '',
-          department: parsed.teacher?.department || parsed.institution?.department || 'Physics',
+          department: parsed.teacher?.department || parsed.institution?.department || '',
         },
         dates: {
           submissionDate: parsed.assignment?.submissionDate ?? '',

@@ -52,7 +52,7 @@ export const TITUMIR_FACULTIES: FacultyItem[] = [
 ];
 
 export function normalizeFaculty(facultyName?: string): string {
-  if (!facultyName) return TITUMIR_FACULTIES[1].name; // Default: Faculty of Science
+  if (!facultyName) return '';
   const trimmed = facultyName.trim();
   if (
     trimmed === 'Faculty of Arts & Humanities' ||
@@ -67,22 +67,23 @@ export function normalizeFaculty(facultyName?: string): string {
   const found = TITUMIR_FACULTIES.find(
     (f) => f.name.toLowerCase() === trimmed.toLowerCase()
   );
-  return found ? found.name : TITUMIR_FACULTIES[1].name;
+  return found ? found.name : '';
 }
 
-export function getFacultyByName(facultyName?: string): FacultyItem {
+export function getFacultyByName(facultyName?: string): FacultyItem | null {
   const normalized = normalizeFaculty(facultyName);
   const found = TITUMIR_FACULTIES.find((f) => f.name === normalized);
-  return found || TITUMIR_FACULTIES[1];
+  return found || null;
 }
 
 export function getDepartmentsForFaculty(facultyName?: string): string[] {
-  return getFacultyByName(facultyName).departments;
+  const faculty = getFacultyByName(facultyName);
+  return faculty ? faculty.departments : [];
 }
 
 export const INITIAL_SAMPLE_DATA: CoverPageData = {
   institution: {
-    collegeName: '',
+    collegeName: 'Government Titumir College',
     faculty: '',
     department: '',
   },
@@ -113,7 +114,7 @@ export const INITIAL_SAMPLE_DATA: CoverPageData = {
 
 export const BLANK_COVER_DATA: CoverPageData = {
   institution: {
-    collegeName: '',
+    collegeName: 'Government Titumir College',
     faculty: '',
     department: '',
   },
