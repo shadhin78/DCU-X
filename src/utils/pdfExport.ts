@@ -228,7 +228,8 @@ function patchWindowGetComputedStyle(targetWindow: Window): () => void {
 export function getPdfFileName(
   studentName?: string,
   assignmentNo?: string,
-  collegeName?: string
+  collegeName?: string,
+  documentType?: string
 ): string {
   // Remove filesystem-unsafe characters: / \ ? % * : | " < > # and control codes
   const cleanStudent = (studentName || '')
@@ -255,7 +256,8 @@ export function getPdfFileName(
     .replace(/^_+|_+$/g, '');
   const finalCollege = cleanCollege || 'DCU';
 
-  return `${finalCollege}_Assignment_Cover_${finalStudent}_${finalAssignment}.pdf`;
+  const typeLabel = (documentType || 'Assignment').replace(/\s+/g, '_');
+  return `${finalCollege}_${typeLabel}_Cover_${finalStudent}_${finalAssignment}.pdf`;
 }
 
 /**
@@ -272,6 +274,7 @@ export async function downloadCoverPagePdf(options: {
   studentName?: string;
   assignmentNo?: string;
   collegeName?: string;
+  documentType?: string;
 }): Promise<void> {
   const {
     elementId = 'a4-cover-sheet',
@@ -279,6 +282,7 @@ export async function downloadCoverPagePdf(options: {
     studentName,
     assignmentNo,
     collegeName,
+    documentType,
   } = options;
 
   const element = document.getElementById(elementId);
@@ -511,7 +515,7 @@ export async function downloadCoverPagePdf(options: {
     }
 
     // 6. Filename formatting with safe fallbacks and Unicode support
-    const fileName = getPdfFileName(studentName, assignmentNo, collegeName);
+    const fileName = getPdfFileName(studentName, assignmentNo, collegeName, documentType);
 
     // 7. Download directly in browser via local Blob object URL
     const blob = pdf.output('blob');

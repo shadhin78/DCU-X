@@ -216,6 +216,17 @@ export function getDepartmentsForFaculty(facultyName?: string): string[] {
   return faculty ? faculty.departments : [];
 }
 
+export const DOCUMENT_TYPES = [
+  'Assignment',
+  'Lab Report',
+  'Term Paper',
+  'Project',
+  'Presentation',
+  'Thesis',
+  'Report',
+  'Case Study',
+];
+
 export const INITIAL_SAMPLE_DATA: CoverPageData = {
   institution: {
     collegeName: 'Govt. Titumir College',
@@ -223,6 +234,7 @@ export const INITIAL_SAMPLE_DATA: CoverPageData = {
     department: '',
   },
   course: {
+    documentType: 'Assignment',
     courseCode: '',
     courseTitle: '',
     assignmentNo: '',
@@ -254,6 +266,7 @@ export const BLANK_COVER_DATA: CoverPageData = {
     department: '',
   },
   course: {
+    documentType: 'Assignment',
     courseCode: '',
     courseTitle: '',
     assignmentNo: '',

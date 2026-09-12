@@ -102,14 +102,14 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
           {/* ASSIGNMENT HEADER */}
           <div className="assignment-header w-full box-border flex flex-col items-center justify-center m-0 text-center">
             <h3 className="font-academic font-black text-[23px] tracking-[0.25em] text-[#0f172a] uppercase mx-auto">
-              A S S I G N M E N T
+              {(data.course.documentType || 'Assignment').split('').join(' ').toUpperCase()}
             </h3>
 
             <div className="mt-3.5 mb-7 inline-block border-2 border-[#1e3a8a] rounded-lg px-6 py-0.5 bg-blue-50/60 shadow-2xs mx-auto">
               <span className="font-sans text-[13.5px] font-bold text-[#1e3a8a] tracking-wide">
                 {data.course.assignmentNo
-                  ? `Assignment No: ${data.course.assignmentNo}`
-                  : 'Assignment No: 01'}
+                  ? `${data.course.documentType || 'Assignment'} No: ${data.course.assignmentNo}`
+                  : `${data.course.documentType || 'Assignment'} No: 01`}
               </span>
             </div>
           </div>
@@ -131,7 +131,7 @@ export const ModernBlueTemplate: React.FC<TemplateProps> = ({
               </span>
             </div>
             <div className="grid grid-cols-[125px_12px_1fr] items-baseline py-1 text-[13.5px]">
-              <span className="font-bold text-[#334155]">Assignment Title</span>
+              <span className="font-bold text-[#334155]">{data.course.documentType || 'Assignment'} Title</span>
               <span className="font-bold text-[#64748b]">:</span>
               <span className="font-bold text-[#0f172a] text-[14.5px] leading-snug">
                 {data.course.assignmentTitle || ''}

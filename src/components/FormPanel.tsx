@@ -24,6 +24,7 @@ import {
   normalizeFaculty,
   SEVEN_COLLEGES,
   findCollege,
+  DOCUMENT_TYPES,
 } from '../data/collegeData';
 
 interface FormPanelProps {
@@ -158,7 +159,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Editor Header Bar */}
       <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-xs">
         <h2 className="text-sm sm:text-base font-bold text-slate-900">
-          Assignment Cover Editor
+          {data.course.documentType || 'Assignment'} Cover Editor
         </h2>
         <p className="text-[11.5px] text-slate-500 mt-0.5">
           Fill in the fields below. Live A4 cover page updates instantly.
@@ -369,8 +370,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 <p className="text-[11px] text-slate-500 font-normal truncate max-w-[240px] sm:max-w-xs">
                   {data.course.courseCode || 'Course Code'} •{' '}
                   {data.course.assignmentNo
-                    ? `Assignment #${data.course.assignmentNo}`
-                    : 'Assignment'}
+                    ? `${data.course.documentType || 'Assignment'} #${data.course.assignmentNo}`
+                    : (data.course.documentType || 'Assignment')}
                 </p>
               )}
             </div>
@@ -389,6 +390,31 @@ export const FormPanel: React.FC<FormPanelProps> = ({
 
         {openSections.course && (
           <div className="p-4 sm:p-5 pt-1 sm:pt-2 border-t border-slate-100 space-y-3.5">
+            {/* Document Type Dropdown */}
+            <div>
+              <label
+                htmlFor="input-document-type"
+                className="block text-xs font-semibold text-slate-700 mb-1"
+              >
+                Document Type{' '}
+                <span className="text-rose-500 font-bold" title="Required field">
+                  *
+                </span>
+              </label>
+              <select
+                id="input-document-type"
+                value={data.course.documentType || 'Assignment'}
+                onChange={(e) => onUpdateCourse({ documentType: e.target.value })}
+                className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white font-medium text-slate-800 transition-shadow"
+              >
+                {DOCUMENT_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="sm:col-span-1">
                 <label
@@ -436,7 +462,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   htmlFor="input-assignment-no"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  Assignment No{' '}
+                  {data.course.documentType || 'Assignment'} No{' '}
                   <span className="text-rose-500 font-bold" title="Required field">
                     *
                   </span>
@@ -455,7 +481,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   htmlFor="input-assignment-title"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  Assignment Title{' '}
+                  {data.course.documentType || 'Assignment'} Title{' '}
                   <span className="text-rose-500 font-bold" title="Required field">
                     *
                   </span>

@@ -5,6 +5,7 @@ export interface InstitutionInfo {
 }
 
 export interface CourseInfo {
+  documentType: string;
   courseCode: string;
   courseTitle: string;
   assignmentNo: string;

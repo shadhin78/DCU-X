@@ -75,14 +75,14 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
       {/* Middle Section */}
       <div className="text-center flex flex-col items-center py-1">
         <h2 className="font-cinzel font-black text-[24px] tracking-[0.28em] text-slate-950 uppercase">
-          A S S I G N M E N T
+          {(data.course.documentType || 'Assignment').split('').join(' ').toUpperCase()}
         </h2>
 
         <div className="mt-3.5 mb-7 inline-block border-2 border-slate-950 rounded-lg px-5 py-1 bg-white shadow-2xs">
           <span className="font-sans text-[13px] font-bold tracking-wider text-slate-950">
             {data.course.assignmentNo
-              ? `Assignment No: ${data.course.assignmentNo}`
-              : 'Assignment No: ____'}
+              ? `${data.course.documentType || 'Assignment'} No: ${data.course.assignmentNo}`
+              : `${data.course.documentType || 'Assignment'} No: ____`}
           </span>
         </div>
 
@@ -102,7 +102,7 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
             </span>
           </div>
           <div className="grid grid-cols-[135px_14px_1fr] items-baseline py-0.5">
-            <span className="font-bold text-slate-950">Assignment Title</span>
+            <span className="font-bold text-slate-950">{data.course.documentType || 'Assignment'} Title</span>
             <span className="font-bold text-slate-950">:</span>
             <span className="font-serif font-bold text-slate-950 leading-snug">
               {data.course.assignmentTitle || ''}

@@ -136,6 +136,7 @@ export default function App() {
         studentName: data.student.name,
         assignmentNo: data.course.assignmentNo,
         collegeName: data.institution.collegeName,
+        documentType: data.course.documentType,
       });
       const name = data.student.name?.trim() || 'Student';
       setDownloadNotice(`Cover page for ${name} exported to A4 PDF successfully!`);

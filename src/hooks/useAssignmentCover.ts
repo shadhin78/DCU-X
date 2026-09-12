@@ -26,6 +26,7 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
           department: parsed.institution?.department ?? '',
         },
         course: {
+          documentType: parsed.course?.documentType || 'Assignment',
           courseCode: parsed.course?.courseCode ?? '',
           courseTitle: parsed.course?.courseTitle ?? '',
           assignmentNo: parsed.course?.assignmentNo ?? '',
@@ -60,6 +61,7 @@ function parseSavedData(jsonStr: string): CoverPageData | null {
           department: parsed.institution?.department || '',
         },
         course: {
+          documentType: 'Assignment',
           courseCode: parsed.assignment?.courseCode ?? '',
           courseTitle: parsed.assignment?.courseTitle ?? '',
           assignmentNo: '01',
