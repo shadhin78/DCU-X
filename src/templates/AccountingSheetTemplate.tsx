@@ -109,30 +109,30 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
         {layoutStyle === 'side-by-side' ? (
           <div className="grid grid-cols-2 gap-5 items-stretch">
             {/* Left: Submitted By */}
-            <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white/95 shadow-2xs flex flex-col justify-between backdrop-blur-xs h-full min-w-0 w-full box-border">
+            <div className="border border-slate-900/90 rounded-lg p-4 bg-white/95 shadow-2xs flex flex-col justify-between backdrop-blur-xs h-full min-w-0 w-full box-border">
               <div>
-                <div className="border-b-2 border-slate-950 pb-1 mb-2">
-                  <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
+                <div className="border-b-2 border-slate-950 pb-1.5 mb-2.5">
+                  <h3 className="font-cinzel font-bold text-[15px] text-slate-950 uppercase tracking-wider">
                     Submitted By
                   </h3>
                 </div>
-                <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                <div className="space-y-2 font-academic text-[15px] leading-snug">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Name</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-bold text-slate-950 break-words min-w-0">{data.student.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Roll</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-mono font-bold text-slate-950 break-words min-w-0">{data.student.roll || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Department</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900 break-words min-w-0">{data.student.department || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Year</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900 break-words min-w-0">{data.student.year || data.student.semester || ''}</span>
@@ -142,35 +142,35 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
             </div>
 
             {/* Right: Submitted To */}
-            <div className="border border-slate-900/90 rounded-lg p-3.5 bg-white/95 shadow-2xs flex flex-col justify-between backdrop-blur-xs h-full min-w-0 w-full box-border">
+            <div className="border border-slate-900/90 rounded-lg p-4 bg-white/95 shadow-2xs flex flex-col justify-between backdrop-blur-xs h-full min-w-0 w-full box-border">
               <div>
-                <div className="border-b-2 border-slate-950 pb-1 mb-2">
-                  <h3 className="font-cinzel font-bold text-[12.5px] text-slate-950 uppercase tracking-wider">
+                <div className="border-b-2 border-slate-950 pb-1.5 mb-2.5">
+                  <h3 className="font-cinzel font-bold text-[15px] text-slate-950 uppercase tracking-wider">
                     Submitted To
                   </h3>
                 </div>
-                <div className="space-y-1.5 font-academic text-[12.5px] leading-snug">
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                <div className="space-y-2 font-academic text-[15px] leading-snug">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Name</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="font-bold text-slate-950 break-words min-w-0">{data.teacher.name || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Designation</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900 break-words min-w-0">{data.teacher.designation || ''}</span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">Department</span>
                     <span className="font-bold text-slate-950">:</span>
                     <span className="text-slate-900 break-words min-w-0">
                       {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[92px_12px_1fr] items-baseline">
+                  <div className="grid grid-cols-[110px_14px_1fr] items-baseline">
                     <span className="font-bold text-slate-950">College</span>
                     <span className="font-bold text-slate-950">:</span>
-                    <span className="text-slate-800 text-[11px] break-words min-w-0">
+                    <span className="text-slate-800 text-[13.5px] break-words min-w-0">
                       {data.institution.collegeName || ''}
                     </span>
                   </div>
@@ -183,11 +183,11 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
           <div className="space-y-2.5 max-w-[480px] mx-auto">
             <div className="border border-slate-900 rounded-lg p-2.5 bg-white/95 shadow-2xs backdrop-blur-xs">
               <div className="border-b border-slate-950 pb-1 mb-1.5">
-                <h3 className="font-cinzel font-bold text-[12px] text-slate-950 uppercase tracking-wider">
+                <h3 className="font-cinzel font-bold text-[14.5px] text-slate-950 uppercase tracking-wider">
                   Submitted By
                 </h3>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-academic text-[11.5px]">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 font-academic text-[13.5px]">
                 <div className="flex gap-1.5">
                   <span className="font-bold text-slate-950">Name:</span>
                   <span className="font-bold text-slate-950">{data.student.name || ''}</span>
@@ -207,23 +207,23 @@ export const SpecialDepartmentTemplate: React.FC<TemplateProps> = ({
               </div>
             </div>
 
-            <div className="border border-slate-900 rounded-lg p-2.5 bg-white/95 shadow-2xs backdrop-blur-xs">
+            <div className="border border-slate-900 rounded-lg p-3 bg-white/95 shadow-2xs backdrop-blur-xs">
               <div className="border-b border-slate-950 pb-1 mb-1.5">
-                <h3 className="font-cinzel font-bold text-[12px] text-slate-950 uppercase tracking-wider">
+                <h3 className="font-cinzel font-bold text-[14.5px] text-slate-950 uppercase tracking-wider">
                   Submitted To
                 </h3>
               </div>
-              <div className="space-y-1 font-academic text-[11.5px]">
+              <div className="space-y-1.5 font-academic text-[13.5px]">
                 <div className="flex gap-2">
-                  <span className="font-bold text-slate-950 min-w-[80px]">Teacher:</span>
+                  <span className="font-bold text-slate-950 min-w-[96px]">Teacher:</span>
                   <span className="font-bold text-slate-950">{data.teacher.name || ''}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="font-bold text-slate-950 min-w-[80px]">Designation:</span>
+                  <span className="font-bold text-slate-950 min-w-[96px]">Designation:</span>
                   <span className="text-slate-900">{data.teacher.designation || ''}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="font-bold text-slate-950 min-w-[80px]">Department:</span>
+                  <span className="font-bold text-slate-950 min-w-[96px]">Department:</span>
                   <span className="text-slate-900">
                     {data.teacher.department ? `Department of ${data.teacher.department}` : ''}
                   </span>
