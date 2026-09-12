@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { FormPanel } from './components/FormPanel';
 import { A4PreviewPanel } from './components/A4PreviewPanel';
+import { AppInstallSection } from './components/AppInstallSection';
+import { PrivacyPage } from './components/PrivacyPage';
 import { useAssignmentCover } from './hooks/useAssignmentCover';
 import { downloadCoverPagePdf } from './utils/pdfExport';
-import { CheckCircle2, ArrowUp, RefreshCw, WifiOff } from 'lucide-react';
+import { CheckCircle2, ArrowUp, RefreshCw, WifiOff, ShieldCheck } from 'lucide-react';
 import type { PwaUpdateEventDetail } from './registerServiceWorker';
+
+type ViewMode = 'generator' | 'privacy';
 
 export default function App() {
   const {
@@ -27,7 +31,29 @@ export default function App() {
   const [updateApplyFn, setUpdateApplyFn] = useState<(() => void) | null>(null);
   const [isOffline, setIsOffline] = useState<boolean>(() => (typeof navigator !== 'undefined' ? !navigator.onLine : false));
 
+  // Navigation view state (URL hash synced: #privacy)
+  const [currentView, setCurrentView] = useState<ViewMode>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      const page = new URLSearchParams(window.location.search).get('page');
+      if (hash === '#privacy' || hash === '#/privacy' || page === 'privacy') {
+        return 'privacy';
+      }
+    }
+    return 'generator';
+  });
+
   useEffect(() => {
+    const handleUrlChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      const page = new URLSearchParams(window.location.search).get('page');
+      if (hash === '#privacy' || hash === '#/privacy' || page === 'privacy') {
+        setCurrentView('privacy');
+      } else {
+        setCurrentView('generator');
+      }
+    };
+
     const handleUpdate = (e: CustomEvent<PwaUpdateEventDetail>) => {
       if (e.detail && typeof e.detail.applyUpdate === 'function') {
         setUpdateApplyFn(() => e.detail.applyUpdate);
@@ -37,16 +63,36 @@ export default function App() {
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
 
+    window.addEventListener('hashchange', handleUrlChange);
+    window.addEventListener('popstate', handleUrlChange);
     window.addEventListener('pwa-update-available', handleUpdate as EventListener);
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
     return () => {
+      window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('popstate', handleUrlChange);
       window.removeEventListener('pwa-update-available', handleUpdate as EventListener);
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
   }, []);
+
+  const navigateToPrivacy = () => {
+    if (window.location.hash !== '#privacy') {
+      window.history.pushState(null, '', '#privacy');
+    }
+    setCurrentView('privacy');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToGenerator = () => {
+    if (window.location.hash) {
+      window.history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+    setCurrentView('generator');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handlePrint = () => {
     window.print();
@@ -97,6 +143,12 @@ export default function App() {
     }
   };
 
+  // If user is viewing the Privacy page
+  if (currentView === 'privacy') {
+    return <PrivacyPage onBack={navigateToGenerator} />;
+  }
+
+  // Primary Generator View
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
       {/* Main Header with Action Buttons */}
@@ -197,15 +249,41 @@ export default function App() {
             />
           </div>
 
-          {/* Right Column: Live A4 Preview (Sticky on desktop, stacked below on mobile) */}
+          {/* Right Column: Live A4 Preview & App Install Section */}
           <div
             id="a4-preview-section"
-            className="lg:col-span-7 xl:col-span-7 w-full self-start"
+            className="lg:col-span-7 xl:col-span-7 w-full self-start flex flex-col gap-4"
           >
+            {/* Live A4 Sheet Preview */}
             <A4PreviewPanel data={data} />
+
+            {/* App Install Now Section with Privacy Hyperlink (Positioned below the A4 preview box) */}
+            <AppInstallSection onOpenPrivacy={navigateToPrivacy} />
           </div>
         </div>
       </main>
+
+      {/* Subtle Footer with Privacy Policy link */}
+      <footer className="w-full py-4 text-xs text-slate-500 border-t border-slate-200 mt-6 print:hidden">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          <p>&copy; {new Date().getFullYear()} Dhaka Central University Assignment Cover Generator (DCU-X).</p>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              100% Client-Side Private
+            </span>
+            <span className="text-slate-300">|</span>
+            <button
+              type="button"
+              id="footer-link-privacy"
+              onClick={navigateToPrivacy}
+              className="text-slate-600 hover:text-emerald-700 font-semibold underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              Privacy Policy &amp; Security
+            </button>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -100,6 +100,18 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
+  // 0. Bypass Vite development server requests, HMR, and virtual modules
+  if (
+    url.pathname.startsWith('/@') ||
+    url.pathname.startsWith('/src/') ||
+    url.pathname.startsWith('/node_modules/') ||
+    url.pathname.includes('vite') ||
+    url.search.includes('t=') ||
+    url.search.includes('import')
+  ) {
+    return;
+  }
+
   // 1. Never cache analytics, tag managers, or tracking requests
   if (
     url.hostname.includes('google-analytics.com') ||

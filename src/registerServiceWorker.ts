@@ -18,16 +18,6 @@ export function registerServiceWorker(): void {
     return;
   }
 
-  // In development, unregister any service worker to avoid caching conflicts with Vite HMR
-  if (import.meta.env.DEV) {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
-      for (const registration of registrations) {
-        registration.unregister().catch(() => {});
-      }
-    });
-    return;
-  }
-
   // Prevent infinite reload loops on controllerchange
   let isRefreshing = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
