@@ -4,12 +4,13 @@ import { FormPanel } from './components/FormPanel';
 import { A4PreviewPanel } from './components/A4PreviewPanel';
 import { AppInstallSection } from './components/AppInstallSection';
 import { PrivacyPage } from './components/PrivacyPage';
+import { AboutPage } from './components/AboutPage';
 import { useAssignmentCover } from './hooks/useAssignmentCover';
 import { downloadCoverPagePdf } from './utils/pdfExport';
 import { CheckCircle2, ArrowUp, RefreshCw, WifiOff, ShieldCheck } from 'lucide-react';
 import type { PwaUpdateEventDetail } from './registerServiceWorker';
 
-type ViewMode = 'generator' | 'privacy';
+type ViewMode = 'generator' | 'privacy' | 'about';
 
 export default function App() {
   const {
@@ -31,13 +32,16 @@ export default function App() {
   const [updateApplyFn, setUpdateApplyFn] = useState<(() => void) | null>(null);
   const [isOffline, setIsOffline] = useState<boolean>(() => (typeof navigator !== 'undefined' ? !navigator.onLine : false));
 
-  // Navigation view state (URL hash synced: #privacy)
+  // Navigation view state (URL hash synced: #privacy, #about)
   const [currentView, setCurrentView] = useState<ViewMode>(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.toLowerCase();
       const page = new URLSearchParams(window.location.search).get('page');
       if (hash === '#privacy' || hash === '#/privacy' || page === 'privacy') {
         return 'privacy';
+      }
+      if (hash === '#about' || hash === '#/about' || page === 'about') {
+        return 'about';
       }
     }
     return 'generator';
@@ -49,6 +53,8 @@ export default function App() {
       const page = new URLSearchParams(window.location.search).get('page');
       if (hash === '#privacy' || hash === '#/privacy' || page === 'privacy') {
         setCurrentView('privacy');
+      } else if (hash === '#about' || hash === '#/about' || page === 'about') {
+        setCurrentView('about');
       } else {
         setCurrentView('generator');
       }
@@ -83,6 +89,14 @@ export default function App() {
       window.history.pushState(null, '', '#privacy');
     }
     setCurrentView('privacy');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToAbout = () => {
+    if (window.location.hash !== '#about') {
+      window.history.pushState(null, '', '#about');
+    }
+    setCurrentView('about');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -146,6 +160,11 @@ export default function App() {
   // If user is viewing the Privacy page
   if (currentView === 'privacy') {
     return <PrivacyPage onBack={navigateToGenerator} />;
+  }
+
+  // If user is viewing the About Us page
+  if (currentView === 'about') {
+    return <AboutPage onBack={navigateToGenerator} />;
   }
 
   // Primary Generator View
@@ -257,21 +276,29 @@ export default function App() {
             {/* Live A4 Sheet Preview */}
             <A4PreviewPanel data={data} />
 
-            {/* App Install Now Section with Privacy Hyperlink (Positioned below the A4 preview box) */}
-            <AppInstallSection onOpenPrivacy={navigateToPrivacy} />
+            {/* App Install Now Section with Privacy & About Us Hyperlinks */}
+            <AppInstallSection
+              onOpenPrivacy={navigateToPrivacy}
+              onOpenAbout={navigateToAbout}
+            />
           </div>
         </div>
       </main>
 
-      {/* Subtle Footer with Privacy Policy link */}
-      <footer className="w-full py-4 text-xs text-slate-500 border-t border-slate-200 mt-6 print:hidden">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+      {/* Footer with About Us & Privacy Policy */}
+      <footer className="w-full py-5 text-xs text-slate-500 border-t border-slate-200 mt-8 print:hidden bg-white/50 backdrop-blur-xs">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p>&copy; {new Date().getFullYear()} Dhaka Central University Assignment Cover Generator (DCU-X).</p>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              100% Client-Side Private
-            </span>
+
+          <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-end">
+            <button
+              type="button"
+              id="footer-link-about"
+              onClick={navigateToAbout}
+              className="text-slate-600 hover:text-emerald-700 font-semibold underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              About Us
+            </button>
             <span className="text-slate-300">|</span>
             <button
               type="button"
@@ -279,8 +306,13 @@ export default function App() {
               onClick={navigateToPrivacy}
               className="text-slate-600 hover:text-emerald-700 font-semibold underline underline-offset-2 transition-colors cursor-pointer"
             >
-              Privacy Policy &amp; Security
+              Privacy Policy
             </button>
+            <span className="text-slate-300">|</span>
+            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              100% Client-Side
+            </span>
           </div>
         </div>
       </footer>

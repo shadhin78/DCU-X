@@ -5,9 +5,10 @@ import { InstallInstructionsModal } from './InstallInstructionsModal';
 
 interface AppInstallSectionProps {
   onOpenPrivacy: () => void;
+  onOpenAbout: () => void;
 }
 
-export const AppInstallSection: React.FC<AppInstallSectionProps> = ({ onOpenPrivacy }) => {
+export const AppInstallSection: React.FC<AppInstallSectionProps> = ({ onOpenPrivacy, onOpenAbout }) => {
   const {
     isInstalled,
     isModalOpen,
@@ -96,11 +97,11 @@ export const AppInstallSection: React.FC<AppInstallSectionProps> = ({ onOpenPriv
           </div>
           <div className="flex items-center gap-1.5 font-medium">
             <Laptop className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-            <span>Windows & Mac</span>
+            <span>Windows &amp; Mac</span>
           </div>
           <div className="flex items-center gap-1.5 font-medium">
             <Smartphone className="w-3.5 h-3.5 text-purple-500 shrink-0" />
-            <span>Android & iOS</span>
+            <span>Android &amp; iOS</span>
           </div>
           <div className="flex items-center gap-1.5 font-medium">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -108,25 +109,42 @@ export const AppInstallSection: React.FC<AppInstallSectionProps> = ({ onOpenPriv
           </div>
         </div>
 
-        {/* User Data Privacy Guarantee Note with Hyperlink on 'Privacy' */}
-        <div className="mt-3 bg-slate-50/80 rounded-lg p-2.5 border border-slate-200/70 flex items-start gap-2 text-[11.5px] text-slate-600 leading-snug">
-          <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-          <p>
-            Your information never leaves your device. Learn how your data is kept safe and managed in our{' '}
+        {/* Hyperlink Section: Privacy and About Us Links */}
+        <div className="mt-3 bg-slate-50/80 rounded-lg p-2.5 border border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-[11.5px] text-slate-600 leading-snug">
+          <div className="flex items-start gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+            <p>
+              Your information never leaves your device. Learn how your data is kept safe in our{' '}
+              <a
+                href="#privacy"
+                id="link-privacy-policy"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenPrivacy();
+                }}
+                className="font-bold text-emerald-700 hover:text-emerald-900 underline underline-offset-2 decoration-emerald-500/60 hover:decoration-emerald-700 transition-colors cursor-pointer"
+                title="Read the DCU-X Privacy and Data Security policy"
+              >
+                Privacy
+              </a>{' '}
+              policy.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 sm:shrink-0 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-slate-200 text-xs">
             <a
-              href="#privacy"
-              id="link-privacy-policy"
+              href="#about"
+              id="link-about-us"
               onClick={(e) => {
                 e.preventDefault();
-                onOpenPrivacy();
+                onOpenAbout();
               }}
-              className="font-bold text-emerald-700 hover:text-emerald-900 underline underline-offset-2 decoration-emerald-500/60 hover:decoration-emerald-700 transition-colors cursor-pointer"
-              title="Read the DCU-X Privacy and Data Security policy"
+              className="font-bold text-emerald-700 hover:text-emerald-900 underline underline-offset-2 decoration-emerald-500/60 hover:decoration-emerald-700 transition-colors cursor-pointer whitespace-nowrap"
+              title="Learn About DCU-X, DCU, and the 7 Affiliated Colleges"
             >
-              Privacy
-            </a>{' '}
-            policy.
-          </p>
+              About Us
+            </a>
+          </div>
         </div>
       </section>
 
