@@ -142,7 +142,7 @@ export const A4PreviewPanel: React.FC<A4PreviewPanelProps> = ({
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-              A4 {data.course.documentType || 'Assignment'} Cover
+              A4 {data.course.documentType?.trim() || 'Assignment'} Cover
             </span>
             <span className="text-xs text-slate-400">|</span>
             <span className="text-[11px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">

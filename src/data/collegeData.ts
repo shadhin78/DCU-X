@@ -135,6 +135,12 @@ export function getCollegeEstd(collegeName?: string): string {
   return college?.estd || '';
 }
 
+export function shouldShowDcuSubtitle(collegeName?: string): boolean {
+  if (!collegeName) return false;
+  const college = findCollege(collegeName);
+  return Boolean(college && college.id !== 'dcu');
+}
+
 export const TITUMIR_FACULTIES: FacultyItem[] = [
   {
     id: 'arts-social-science',
@@ -226,6 +232,20 @@ export const DOCUMENT_TYPES = [
   'Report',
   'Case Study',
 ];
+
+/**
+ * Formats the document type for the cover page heading in PDF:
+ * - Each letter in a word is separated by 1 space (e.g. "L A B")
+ * - Where the dropdown item has 1 space (e.g. between "Lab" and "Report"),
+ *   in the PDF that space becomes 3 spaces: "L A B   R E P O R T"
+ */
+export function formatDocumentTypeHeading(documentType?: string): string {
+  const clean = (documentType?.trim() || 'Assignment').toUpperCase();
+  const words = clean.split(/\s+/);
+  return words
+    .map((word) => word.split('').join(' '))
+    .join('\u00A0\u00A0\u00A0');
+}
 
 export const INITIAL_SAMPLE_DATA: CoverPageData = {
   institution: {

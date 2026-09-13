@@ -256,7 +256,13 @@ export function getPdfFileName(
     .replace(/^_+|_+$/g, '');
   const finalCollege = cleanCollege || 'DCU';
 
-  const typeLabel = (documentType || 'Assignment').replace(/\s+/g, '_');
+  const cleanType = (documentType || 'Assignment')
+    .trim()
+    .replace(/[/\\?%*:|"<>#\x00-\x1f\x80-\x9f]/g, '')
+    .replace(/\s+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  const typeLabel = cleanType || 'Assignment';
   return `${finalCollege}_${typeLabel}_Cover_${finalStudent}_${finalAssignment}.pdf`;
 }
 

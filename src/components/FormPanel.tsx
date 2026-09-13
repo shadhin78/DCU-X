@@ -90,6 +90,27 @@ export const FormPanel: React.FC<FormPanelProps> = ({
     }
   };
 
+  const [isCustomDocTypeSelected, setIsCustomDocTypeSelected] = useState(false);
+
+  const isPredefinedDocType = DOCUMENT_TYPES.some(
+    (t) => t.toLowerCase() === (data.course.documentType || '').toLowerCase()
+  );
+  const isCustomDocTypeMode =
+    isCustomDocTypeSelected || (!isPredefinedDocType && Boolean(data.course.documentType));
+
+  const handleDocTypeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    if (val === '__custom__') {
+      setIsCustomDocTypeSelected(true);
+      if (isPredefinedDocType) {
+        onUpdateCourse({ documentType: 'Other' });
+      }
+    } else {
+      setIsCustomDocTypeSelected(false);
+      onUpdateCourse({ documentType: val });
+    }
+  };
+
   const toggleSection = (section: keyof typeof openSections) => {
     setOpenSections((prev) => ({
       ...prev,
@@ -159,7 +180,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
       {/* Editor Header Bar */}
       <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-xs">
         <h2 className="text-sm sm:text-base font-bold text-slate-900">
-          {data.course.documentType || 'Assignment'} Cover Editor
+          {data.course.documentType?.trim() || 'Assignment'} Cover Editor
         </h2>
         <p className="text-[11.5px] text-slate-500 mt-0.5">
           Fill in the fields below. Live A4 cover page updates instantly.
@@ -370,8 +391,8 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                 <p className="text-[11px] text-slate-500 font-normal truncate max-w-[240px] sm:max-w-xs">
                   {data.course.courseCode || 'Course Code'} •{' '}
                   {data.course.assignmentNo
-                    ? `${data.course.documentType || 'Assignment'} #${data.course.assignmentNo}`
-                    : (data.course.documentType || 'Assignment')}
+                    ? `${data.course.documentType?.trim() || 'Assignment'} #${data.course.assignmentNo}`
+                    : (data.course.documentType?.trim() || 'Assignment')}
                 </p>
               )}
             </div>
@@ -392,19 +413,37 @@ export const FormPanel: React.FC<FormPanelProps> = ({
           <div className="p-4 sm:p-5 pt-1 sm:pt-2 border-t border-slate-100 space-y-3.5">
             {/* Document Type Dropdown */}
             <div>
-              <label
-                htmlFor="input-document-type"
-                className="block text-xs font-semibold text-slate-700 mb-1"
-              >
-                Document Type{' '}
-                <span className="text-rose-500 font-bold" title="Required field">
-                  *
-                </span>
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label
+                  htmlFor="input-document-type"
+                  className="block text-xs font-semibold text-slate-700"
+                >
+                  Document Type{' '}
+                  <span className="text-rose-500 font-bold" title="Required field">
+                    *
+                  </span>
+                </label>
+                {isCustomDocTypeMode && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsCustomDocTypeSelected(false);
+                      onUpdateCourse({ documentType: 'Assignment' });
+                    }}
+                    className="text-[11px] text-emerald-600 hover:text-emerald-700 font-medium cursor-pointer"
+                  >
+                    Select from presets
+                  </button>
+                )}
+              </div>
               <select
                 id="input-document-type"
-                value={data.course.documentType || 'Assignment'}
-                onChange={(e) => onUpdateCourse({ documentType: e.target.value })}
+                value={
+                  isCustomDocTypeMode
+                    ? '__custom__'
+                    : (isPredefinedDocType ? (data.course.documentType || 'Assignment') : '__custom__')
+                }
+                onChange={handleDocTypeSelect}
                 className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white font-medium text-slate-800 transition-shadow"
               >
                 {DOCUMENT_TYPES.map((type) => (
@@ -412,7 +451,25 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                     {type}
                   </option>
                 ))}
+                <option value="__custom__">Custom / Other</option>
               </select>
+
+              {isCustomDocTypeMode && (
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="input-custom-document-type"
+                    value={data.course.documentType}
+                    onChange={(e) => onUpdateCourse({ documentType: e.target.value })}
+                    placeholder="Enter custom document type (e.g. Other, Research Paper, Internship Report)"
+                    className="w-full text-xs sm:text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white text-slate-900 transition-shadow"
+                    autoFocus
+                  />
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Enter custom document type. It updates across all templates and PDF export.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -462,7 +519,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   htmlFor="input-assignment-no"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  {data.course.documentType || 'Assignment'} No{' '}
+                  {data.course.documentType?.trim() || 'Assignment'} No{' '}
                   <span className="text-rose-500 font-bold" title="Required field">
                     *
                   </span>
@@ -481,7 +538,7 @@ export const FormPanel: React.FC<FormPanelProps> = ({
                   htmlFor="input-assignment-title"
                   className="block text-xs font-semibold text-slate-700 mb-1"
                 >
-                  {data.course.documentType || 'Assignment'} Title{' '}
+                  {data.course.documentType?.trim() || 'Assignment'} Title{' '}
                   <span className="text-rose-500 font-bold" title="Required field">
                     *
                   </span>
