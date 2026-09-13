@@ -9,6 +9,10 @@ import {
   FileText,
   ShieldCheck,
   Zap,
+  Layers,
+  CheckCircle2,
+  Palette,
+  Laptop,
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -22,48 +26,54 @@ interface CollegeInfo {
   badge?: string;
 }
 
-const SEVEN_COLLEGES: CollegeInfo[] = [
+const INSTITUTIONS: CollegeInfo[] = [
   {
     sl: 1,
-    name: 'Dhaka College',
-    url: 'https://www.dhakacollege.edu.bd/?utm_source=chatgpt.com',
-    badge: 'Estd. 1841',
+    name: 'Dhaka Central University (Central Campus)',
+    url: 'https://dcu.ac.bd/',
+    badge: 'Central University',
   },
   {
     sl: 2,
-    name: 'Eden Mohila College',
-    url: 'https://emc.edu.bd/?utm_source=chatgpt.com',
-    badge: 'Estd. 1873',
+    name: 'Dhaka College',
+    url: 'https://www.dhakacollege.edu.bd/',
+    badge: 'Affiliated College',
   },
   {
     sl: 3,
-    name: 'Begum Badrunnessa Govt. Mahila College',
-    url: 'https://bbgmc.gov.bd/',
-    badge: 'Estd. 1948',
+    name: 'Eden Mohila College',
+    url: 'https://emc.edu.bd/',
+    badge: 'Affiliated College',
   },
   {
     sl: 4,
-    name: 'Kabi Nazrul Govt. College',
-    url: 'https://kabinazrulcollege.gov.bd/?utm_source=chatgpt.com',
-    badge: 'Estd. 1874',
+    name: 'Begum Badrunnessa Govt. Mahila College',
+    url: 'https://bbgmc.gov.bd/',
+    badge: 'Affiliated College',
   },
   {
     sl: 5,
-    name: 'Govt. Shaheed Suhrawardy College',
-    url: 'https://gssc.edu.bd/?utm_source=chatgpt.com',
-    badge: 'Estd. 1949',
+    name: 'Kabi Nazrul Govt. College',
+    url: 'https://kabinazrulcollege.gov.bd/',
+    badge: 'Affiliated College',
   },
   {
     sl: 6,
-    name: 'Govt. Bangla College',
-    url: 'https://banglacollege.gov.bd/',
-    badge: 'Estd. 1962',
+    name: 'Govt. Shaheed Suhrawardy College',
+    url: 'https://gssc.edu.bd/',
+    badge: 'Affiliated College',
   },
   {
     sl: 7,
+    name: 'Govt. Bangla College',
+    url: 'https://banglacollege.gov.bd/',
+    badge: 'Affiliated College',
+  },
+  {
+    sl: 8,
     name: 'Govt. Titumir College',
-    url: 'https://titumircollege.gov.bd/?utm_source=chatgpt.com',
-    badge: 'Estd. 1968',
+    url: 'https://titumircollege.gov.bd/',
+    badge: 'Affiliated College',
   },
 ];
 
@@ -86,10 +96,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-slate-900 truncate">
-              DCU Assignment Cover Generator
+              DCU Cover page Generator
             </span>
             <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              About Us &amp; 7 Colleges
+              About Us &amp; Institutions
             </span>
           </div>
         </div>
@@ -118,10 +128,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
             </div>
             <div>
               <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                About DCU Assignment Cover Generator
+                About DCU Assignment &amp; Document Cover Generator
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-                A dedicated, student-first digital utility designed to generate standard, print-ready, professional A4 assignment cover pages for Dhaka Central University (DCU) and its 7 Affiliated Colleges.
+                A dedicated, student-first academic utility designed to create standard, print-ready, professional A4 cover pages for Dhaka Central University (DCU), its 7 Affiliated Colleges, and any custom academic institution.
               </p>
 
               {/* Badges */}
@@ -138,6 +148,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
                   <FileText className="w-3.5 h-3.5 text-purple-600" />
                   Pixel-Perfect A4 PDF
                 </span>
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 font-semibold border border-amber-200">
+                  <Layers className="w-3.5 h-3.5 text-amber-600" />
+                  Multi-Document Types
+                </span>
               </div>
             </div>
           </div>
@@ -147,45 +161,91 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
         <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-8">
           <div className="flex items-center gap-2.5 mb-3 text-slate-900">
             <Sparkles className="w-5 h-5 text-emerald-700 shrink-0" />
-            <h2 className="text-base sm:text-lg font-bold">About the Site</h2>
+            <h2 className="text-base sm:text-lg font-bold">About the Application</h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            DCU-X was created to solve a persistent daily challenge faced by university students: formatting and printing clean assignment cover pages. Instead of struggling with misaligned Microsoft Word templates or distorted margins, DCU-X provides an instantaneous, interactive generator with real-time A4 sheet preview.
+            DCU-X was created to solve a persistent daily hurdle faced by university students: formatting, aligning, and printing clean academic cover pages. Instead of struggling with broken Microsoft Word margins, shifted logos, or incompatible fonts across devices, DCU-X provides an instantaneous, interactive generator with a live, real-time A4 sheet preview.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-4">
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 text-xs">
               <Zap className="w-4 h-4 text-amber-500 mb-1.5" />
               <strong className="text-slate-900 block font-bold mb-0.5">Real-Time A4 Preview</strong>
-              <span className="text-slate-500">Live preview scaled to exact 210mm &times; 297mm dimensions as you type.</span>
+              <span className="text-slate-500">Live preview scaled to exact 210mm &times; 297mm dimensions with dynamic zoom controls.</span>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 text-xs">
-              <FileText className="w-4 h-4 text-blue-500 mb-1.5" />
-              <strong className="text-slate-900 block font-bold mb-0.5">Departmental Templates</strong>
-              <span className="text-slate-500">Modern Blue, Classic Black, and specialized department frames like Accounting Sheet.</span>
+              <Palette className="w-4 h-4 text-blue-500 mb-1.5" />
+              <strong className="text-slate-900 block font-bold mb-0.5">Academic Design Styles</strong>
+              <span className="text-slate-500">Modern Blue Frame, Classic Black, and Specialized Department (Accounting Sheet) templates.</span>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 text-xs">
               <ShieldCheck className="w-4 h-4 text-emerald-600 mb-1.5" />
               <strong className="text-slate-900 block font-bold mb-0.5">Zero Data Collection</strong>
-              <span className="text-slate-500">Operates 100% in your browser. No server uploads or personal data harvesting.</span>
+              <span className="text-slate-500">Operates 100% in your browser. No server uploads, logins, or tracking of your personal details.</span>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Dhaka Central University & Seven Colleges Portals */}
+        {/* Section 2: What You Can Create */}
+        <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-8">
+          <div className="flex items-center gap-2.5 mb-3 text-slate-900">
+            <Layers className="w-5 h-5 text-indigo-700 shrink-0" />
+            <h2 className="text-base sm:text-lg font-bold">Supported Document Types</h2>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+            DCU-X is not just for assignments &mdash; it adapts across your entire academic journey with dynamic header formatting, labels, and file naming:
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-emerald-700 font-bold mb-0.5">📝 Assignments</span>
+              Regular coursework
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-blue-700 font-bold mb-0.5">🔬 Lab Reports</span>
+              Practical &amp; science labs
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-purple-700 font-bold mb-0.5">📑 Term Papers</span>
+              Semester research papers
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-amber-700 font-bold mb-0.5">📊 Projects</span>
+              Individual &amp; group work
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-rose-700 font-bold mb-0.5">🖥️ Presentations</span>
+              Slides &amp; oral reports
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-cyan-700 font-bold mb-0.5">🎓 Theses</span>
+              Graduation dissertations
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-center font-medium text-slate-800">
+              <span className="block text-teal-700 font-bold mb-0.5">📈 Case Studies</span>
+              Business &amp; field analyses
+            </div>
+            <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-center font-medium text-emerald-900">
+              <span className="block text-emerald-700 font-bold mb-0.5">✨ Custom / Other</span>
+              Any custom title
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Dhaka Central University & Official Portals */}
         <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-8">
           <div className="flex items-center gap-2.5 mb-3 text-slate-900">
             <Building2 className="w-5 h-5 text-blue-700 shrink-0" />
             <h2 className="text-base sm:text-lg font-bold">Dhaka Central University &amp; Official Portals</h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-            Explore the official portals of Dhaka Central University and the centralized Seven Colleges administration:
+            Direct access to official academic portals for central announcements, notices, and college administration:
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* DCU Main */}
             <a
-              href="https://dcu.ac.bd/?utm_source=chatgpt.com"
+              href="https://dcu.ac.bd/"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-4 rounded-xl border border-slate-200 hover:border-emerald-500 bg-slate-50/70 hover:bg-emerald-50/40 transition-all flex items-start justify-between gap-3 cursor-pointer"
@@ -196,7 +256,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
                     Dhaka Central University (DCU)
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-1">Official University Portal</p>
+                <p className="text-[11px] text-slate-500 mt-1">Official Central University Portal</p>
                 <span className="text-[11px] font-mono text-emerald-700 font-semibold mt-1 inline-block">
                   dcu.ac.bd &rarr;
                 </span>
@@ -206,7 +266,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
 
             {/* DCU Seven Colleges Page */}
             <a
-              href="https://dcu.ac.bd/colleges?utm_source=chatgpt.com"
+              href="https://dcu.ac.bd/colleges"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50/70 hover:bg-blue-50/40 transition-all flex items-start justify-between gap-3 cursor-pointer"
@@ -217,7 +277,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
                     DCU &ndash; Seven Colleges Portal
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-1">Affiliated Colleges Directory</p>
+                <p className="text-[11px] text-slate-500 mt-1">Affiliated Colleges Information</p>
                 <span className="text-[11px] font-mono text-blue-700 font-semibold mt-1 inline-block">
                   dcu.ac.bd/colleges &rarr;
                 </span>
@@ -227,15 +287,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
           </div>
         </section>
 
-        {/* Section 3: The 7 Colleges Directory */}
+        {/* Section 4: The 7 Colleges & Central Campus Directory */}
         <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-8">
           <div className="flex items-center justify-between gap-4 mb-4 flex-wrap">
             <div className="flex items-center gap-2.5 text-slate-900">
               <span className="text-lg">🏫</span>
-              <h2 className="text-base sm:text-lg font-bold">The 7 Affiliated Colleges</h2>
+              <h2 className="text-base sm:text-lg font-bold">Participating Institutions Directory</h2>
             </div>
             <span className="text-xs text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full font-medium">
-              Official Institutional Websites
+              Official Websites
             </span>
           </div>
 
@@ -244,12 +304,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50/80 text-slate-700">
                   <th className="py-2.5 px-3 font-bold w-12 text-center">#</th>
-                  <th className="py-2.5 px-3 font-bold">College Name</th>
+                  <th className="py-2.5 px-3 font-bold">Institution Name</th>
                   <th className="py-2.5 px-3 font-bold text-right">Official Website Link</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {SEVEN_COLLEGES.map((college) => (
+                {INSTITUTIONS.map((college) => (
                   <tr key={college.sl} className="hover:bg-slate-50/60 transition-colors">
                     <td className="py-3 px-3 text-center font-mono text-slate-400 font-semibold">
                       {college.sl}
@@ -258,7 +318,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-semibold text-slate-900">{college.name}</span>
                         {college.badge && (
-                          <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-mono">
+                          <span
+                            className={`text-[10px] px-2 py-0.5 rounded font-medium ${
+                              college.badge === 'Central University'
+                                ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                                : 'bg-slate-100 text-slate-600'
+                            }`}
+                          >
                             {college.badge}
                           </span>
                         )}
@@ -285,16 +351,55 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
               </tbody>
             </table>
           </div>
+
+          {/* Custom Institution Highlight Box */}
+          <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-start gap-3">
+            <Laptop className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-slate-900 font-bold block mb-0.5">
+                Using another college or university?
+              </strong>
+              <span>
+                Select <strong>&quot;Other / Custom College...&quot;</strong> from the institution dropdown to type any college or university name. The generator automatically adapts the cover layout, suppresses university-specific logos and subtitles, and exports a clean, custom PDF.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 5: Key Features & Architecture */}
+        <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-8">
+          <div className="flex items-center gap-2.5 mb-3 text-slate-900">
+            <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
+            <h2 className="text-base sm:text-lg font-bold">Why Students Prefer DCU-X</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600">
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+              <span className="text-emerald-600 font-bold text-base mt-[-2px]">&bull;</span>
+              <span><strong>Instant Auto-Save:</strong> Never lose typed information; your draft persists safely in local browser storage.</span>
+            </div>
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+              <span className="text-emerald-600 font-bold text-base mt-[-2px]">&bull;</span>
+              <span><strong>Installable PWA:</strong> Install on your Android, iPhone, Windows, or Mac device to run like a native offline desktop app.</span>
+            </div>
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+              <span className="text-emerald-600 font-bold text-base mt-[-2px]">&bull;</span>
+              <span><strong>One-Click Print &amp; PDF:</strong> Standard A4 portrait format ready for high-resolution laser or inkjet printing.</span>
+            </div>
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+              <span className="text-emerald-600 font-bold text-base mt-[-2px]">&bull;</span>
+              <span><strong>Descriptive PDF Naming:</strong> Downloaded files are automatically named with institution, document type, student name, and number.</span>
+            </div>
+          </div>
         </section>
 
         {/* Bottom Actions Banner */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div>
             <h3 className="text-sm sm:text-base font-bold text-slate-900">
-              Ready to generate your assignment cover?
+              Ready to create your cover page?
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
-              Return to the editor to preview and download your single-page A4 cover page.
+              Return to the editor to customize, preview, and download your single-page A4 document cover.
             </p>
           </div>
           <button
@@ -309,7 +414,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack }) => {
 
         {/* Footer */}
         <footer className="mt-8 text-center text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Dhaka Central University Assignment Cover Generator (DCU-X).</p>
+          <p>&copy; {new Date().getFullYear()} Dhaka Central University Cover Page Generator (DCU-X).</p>
           <p className="mt-1 text-slate-500">
             Developed by{' '}
             <a

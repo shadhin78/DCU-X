@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <h1 className="text-xs sm:text-base font-bold text-slate-900 leading-tight truncate">
-                DCU Assignment Cover Generator
+                DCU Cover page Generator
               </h1>
               <span className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shrink-0">
                 DCU

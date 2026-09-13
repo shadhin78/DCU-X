@@ -10,8 +10,9 @@ import {
   HelpCircle,
   EyeOff,
   CheckCircle2,
-  AlertCircle,
   WifiOff,
+  Database,
+  Layers,
 } from 'lucide-react';
 
 interface PrivacyPageProps {
@@ -37,10 +38,10 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-slate-900 truncate">
-              DCU Assignment Cover Generator
+              DCU Cover page Generator
             </span>
             <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              Privacy & Data Security
+              Privacy &amp; Data Security
             </span>
           </div>
         </div>
@@ -58,7 +59,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
             Home
           </button>
           <span>/</span>
-          <span className="text-slate-800 font-medium">Privacy Policy & Data Security</span>
+          <span className="text-slate-800 font-medium">Privacy Policy &amp; Data Security</span>
         </nav>
 
         {/* Hero Header Banner */}
@@ -69,10 +70,10 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
             </div>
             <div>
               <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Privacy Policy & Data Management
+                Privacy Policy &amp; Data Security
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-                Learn how the DCU Assignment Cover Generator safeguards your student information, manages draft storage locally, and guarantees 100% client-side privacy.
+                Learn how DCU-X safeguards your student data, stores your form drafts locally, and guarantees 100% client-side privacy with zero remote telemetry.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px]">
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200">
@@ -103,7 +104,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
             <h2 className="text-base sm:text-lg font-bold">1. Our Core Privacy Commitment</h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            At DCU-X, student privacy and data sovereignty are our foundational values. We believe that generating an academic assignment cover page should never require transmitting sensitive academic records, student identification numbers, teacher names, or course information across remote servers or third-party databases.
+            At DCU-X, student privacy and data sovereignty are fundamental principles. Generating an academic cover page should never require transmitting sensitive academic credentials, student roll numbers, course titles, teacher names, or institutional details across remote servers or third-party databases.
           </p>
           <div className="mt-4 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 text-xs text-emerald-950 space-y-1.5">
             <p className="font-bold flex items-center gap-1.5">
@@ -111,12 +112,12 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
               Direct Student Guarantee:
             </p>
             <p className="leading-relaxed">
-              We do not collect, monetize, log, or sell your personal details. Everything you type into this generator exists solely in your current browser session and your device&apos;s local memory.
+              We do not collect, monetize, log, track, or sell your personal or academic information. Everything you input into this generator exists solely inside your current browser session and your device&apos;s local memory.
             </p>
           </div>
         </section>
 
-        {/* Section 2: How User Data is Safe */}
+        {/* Section 2: How User Data is Kept Safe */}
         <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-6">
           <div className="flex items-center gap-2.5 mb-4 text-slate-900">
             <Cpu className="w-5 h-5 text-blue-600 shrink-0" />
@@ -129,7 +130,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
                 100% In-Browser Execution
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                All form computations, text validation, date formatting, and live A4 preview renderings are calculated directly on your device by your browser&apos;s JavaScript engine.
+                All form computations, text validation, date formatting, custom department handling, and live A4 preview renderings execute entirely on your device via client-side JavaScript.
               </p>
             </div>
 
@@ -139,27 +140,27 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
                 Local PDF Generation
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                When you click &quot;Download PDF&quot;, the PDF file is generated locally using client-side libraries. No document is ever sent to an external server or cloud conversion API.
+                When you click &quot;Download PDF&quot;, the PDF document is compiled directly in your browser using html2canvas and jsPDF. No document or rasterized canvas is ever transmitted across the internet.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
               <h3 className="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2 mb-1.5">
                 <EyeOff className="w-4 h-4 text-purple-600" />
-                No User Accounts or Passwords
+                No User Accounts or Logins
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                You do not need to register, sign in, or provide an email address to use DCU-X. We have no user accounts or password databases that could be compromised.
+                You do not need to register, log in, or provide contact information to use DCU-X. We have no accounts, authentication servers, or credential databases that could be compromised.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
               <h3 className="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2 mb-1.5">
-                <ShieldCheck className="w-4 h-4 text-amber-600" />
-                Encrypted Asset Delivery (HTTPS)
+                <Layers className="w-4 h-4 text-amber-600" />
+                Custom Inputs Stay Private
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                All application files, fonts, and template graphics are served with SSL/TLS encryption to prevent eavesdropping or tampering in transit.
+                Whether you select predefined colleges/document types or type custom institutions and custom document types (e.g. Research Proposal, Thesis), all custom texts remain strictly on your local machine.
               </p>
             </div>
           </div>
@@ -174,50 +175,68 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
           
           <div className="space-y-4 text-xs sm:text-sm text-slate-600">
             <div>
-              <h3 className="font-bold text-slate-900 mb-1">A. Local Browser Storage (Auto-Save Drafts)</h3>
+              <h3 className="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <Database className="w-4 h-4 text-purple-600" />
+                A. Local Browser Storage (Auto-Save Drafts)
+              </h3>
               <p className="leading-relaxed">
-                To protect you from losing your work if your browser window closes or your laptop battery dies, DCU-X automatically stores your form values in your browser&apos;s <code className="bg-slate-100 text-slate-800 px-1 py-0.5 rounded font-mono text-[11px]">localStorage</code> under the key <code className="bg-slate-100 text-slate-800 px-1 py-0.5 rounded font-mono text-[11px]">dcu_assignment_cover_draft</code>.
+                To prevent accidental loss of work if your browser reloads, window closes, or laptop runs out of battery, DCU-X automatically stores your form state in your browser&apos;s <code className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded font-mono text-[11px]">localStorage</code> under the key <code className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded font-mono text-[11px]">titumir_assignment_cover_data_v2</code>.
               </p>
               <ul className="list-disc list-inside mt-2 space-y-1 text-slate-600 pl-1">
-                <li>This draft remains isolated inside your browser on your physical machine.</li>
-                <li>No other website or user on the internet can read your local storage draft.</li>
+                <li>Your draft remains sandboxed inside your device&apos;s browser profile.</li>
+                <li>No other website, third party, or remote user can access or read your stored draft.</li>
+                <li>Drafts automatically synchronize seamlessly whenever you make an edit.</li>
               </ul>
             </div>
 
             <div className="pt-3 border-t border-slate-100">
               <h3 className="font-bold text-slate-900 mb-1 flex items-center gap-2">
-                <Trash2 className="w-4 h-4 text-red-500" />
+                <Trash2 className="w-4 h-4 text-rose-500" />
                 B. One-Click Instant Data Wiping
               </h3>
               <p className="leading-relaxed">
-                If you are using a shared or public computer (such as a cyber cafe or university lab), click the <strong>&quot;Reset&quot;</strong> button in the top navigation bar. Confirming the reset prompt immediately purges all draft information from your computer&apos;s local storage, leaving no residual traces.
+                If you are working on a shared or public computer (e.g., campus computer lab, cyber cafe, or shared library terminal), click the <strong>&quot;Reset&quot;</strong> button in the top navigation bar. Confirming the reset prompt immediately purges all entered data and deletes the stored draft from your computer&apos;s local storage, leaving zero trace behind.
               </p>
             </div>
 
             <div className="pt-3 border-t border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-1">C. Service Worker &amp; PWA Offline Cache</h3>
+              <h3 className="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                <WifiOff className="w-4 h-4 text-amber-500" />
+                C. Service Worker &amp; PWA Offline Cache
+              </h3>
               <p className="leading-relaxed">
-                The DCU-X Progressive Web App (PWA) uses a Service Worker (<code className="bg-slate-100 text-slate-800 px-1 py-0.5 rounded font-mono text-[11px]">sw.js</code>) to store static website resources (HTML, JavaScript, CSS, institutional logos, and layout templates) in your device&apos;s browser cache. This allows the application to launch and function 100% offline. <strong>The Service Worker never caches your student inputs or personal data.</strong>
+                The DCU-X Progressive Web App (PWA) utilizes a Service Worker (<code className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded font-mono text-[11px]">sw.js</code>) to cache static website assets (HTML, JavaScript, CSS, institutional crests, and template graphics) in your browser cache. This enables the application to open and export covers completely offline without internet connectivity. <strong>The Service Worker never stores or caches personal student inputs or document contents.</strong>
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 4: Analytics Transparency */}
+        {/* Section 4: What is Never Collected */}
         <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-xs mb-6">
           <div className="flex items-center gap-2.5 mb-3 text-slate-900">
             <EyeOff className="w-5 h-5 text-slate-700 shrink-0" />
-            <h2 className="text-base sm:text-lg font-bold">4. Analytics &amp; Cookies</h2>
+            <h2 className="text-base sm:text-lg font-bold">4. Data We Never Collect</h2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            DCU-X uses Google Analytics 4 (GA4) solely to collect anonymous technical telemetry, such as total page views, general device categories (desktop vs. mobile), and performance health.
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+            To provide complete transparency, here is a breakdown of information that is never collected, transmitted, or logged:
           </p>
-          <div className="mt-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
-            <div className="font-semibold text-slate-900">What is NEVER tracked:</div>
-            <p>&bull; Student names, roll numbers, or contact details.</p>
-            <p>&bull; Teacher designations or department assignments.</p>
-            <p>&bull; Assignment titles or course codes.</p>
-            <p>&bull; Downloaded cover page documents or PDF contents.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span className="font-semibold text-rose-700 block mb-0.5">&times; Student Personal Details</span>
+              Name, roll number, registration number, session, or batch.
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span className="font-semibold text-rose-700 block mb-0.5">&times; Academic &amp; Course Content</span>
+              Course code, course title, assignment titles, or custom document types.
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span className="font-semibold text-rose-700 block mb-0.5">&times; Teacher &amp; Faculty Data</span>
+              Instructor names, designations, and department assignments.
+            </div>
+            <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span className="font-semibold text-rose-700 block mb-0.5">&times; Generated Files &amp; PDFs</span>
+              Rendered cover pages, exported files, or print jobs.
+            </div>
           </div>
         </section>
 
@@ -230,19 +249,19 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
           <div className="space-y-4 text-xs sm:text-sm">
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-1">
-                Does Dhaka Central University or any admin see my draft?
+                Does Dhaka Central University or any administrator see my draft?
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                No. The generator runs completely within your own browser sandbox. No draft or generated cover is sent to university servers or administrator panels.
+                No. The generator operates entirely in your own browser sandbox. No draft, form value, or generated cover sheet is sent to university servers, administrators, or cloud databases.
               </p>
             </div>
 
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-1">
-                What should I do if I use a shared computer in a campus library or cafe?
+                What should I do if I use a shared computer in a campus library or cyber cafe?
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                After downloading your PDF, click the <strong>&quot;Reset&quot;</strong> button in the top menu and confirm. This immediately wipes your draft from the browser&apos;s local storage so subsequent users cannot view your information.
+                After downloading or printing your PDF, click the <strong>&quot;Reset&quot;</strong> button in the top menu and confirm. This immediately clears your draft from local storage so the next user cannot view your information.
               </p>
             </div>
 
@@ -251,7 +270,16 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
                 Can I use DCU-X without an active internet connection?
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                Yes! Once installed or loaded once, the PWA service worker caches the editor, allowing you to generate and export covers anytime offline.
+                Yes! Once installed or loaded once, the PWA service worker caches the core editor, templates, and fonts, allowing you to design and export covers anytime offline.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+              <h3 className="font-bold text-slate-900 mb-1">
+                Are custom college names or custom document types sent anywhere?
+              </h3>
+              <p className="text-slate-600 leading-relaxed">
+                No. When you choose &quot;Other / Custom College...&quot; or &quot;Custom / Other&quot; document type, whatever you type is treated exactly like any other form field &mdash; saved only in your local browser storage and exported directly to your PDF file.
               </p>
             </div>
           </div>
@@ -278,7 +306,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onBack }) => {
 
         {/* Footer Note */}
         <footer className="mt-8 text-center text-xs text-slate-400">
-          <p>&copy; {new Date().getFullYear()} Dhaka Central University Assignment Cover Generator (DCU-X). Built with student privacy by design.</p>
+          <p>&copy; {new Date().getFullYear()} Dhaka Central University Cover Page Generator (DCU-X). Built with student privacy by design.</p>
         </footer>
       </main>
     </div>

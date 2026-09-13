@@ -290,7 +290,7 @@ export default function App() {
       {/* Footer with About Us & Privacy Policy */}
       <footer className="w-full py-5 text-xs text-slate-500 border-t border-slate-200 mt-8 print:hidden bg-white/50 backdrop-blur-xs">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <p>&copy; {new Date().getFullYear()} Dhaka Central University Assignment Cover Generator (DCU-X).</p>
+          <p>&copy; {new Date().getFullYear()} Dhaka Central University Cover Page Generator (DCU-X).</p>
 
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-end">
             <button
